@@ -8,8 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
-
+@interface ViewController : UIViewController<UIWebViewDelegate>
+{
+    NSString* access_token;
+    NSString* user_Id;
+    UIWebView* webView;
+    NSMutableData* dataVK;
+}
+-(IBAction)connectVK:(id)sender;
+-(IBAction)GetFriends:(id)sender;
 @end
-
