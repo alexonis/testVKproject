@@ -12,5 +12,6 @@
 {
 IBOutlet UITableView *tableView;
 }
-@property NSArray *ArrayItems;
+-(NSMutableArray*)parser: (NSArray*)array;
+@property NSArray *arrayItems;
 @end

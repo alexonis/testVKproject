@@ -11,6 +11,7 @@
 @interface ViewController ()
 
 @end
+const NSInteger tagWebView=1024;
 
 @implementation ViewController
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
@@ -35,11 +36,10 @@
                           JSONObjectWithData:dataVK
                           options:kNilOptions
                           error:&error];
-    NSArray* ArrayItms;
-    ArrayItms =json[@"response"][@"items"];
+    NSArray* arrayItms=json[@"response"][@"items"];
     ViewControllerSecond *vc;
     vc=[self.storyboard instantiateViewControllerWithIdentifier:@"ViewControllerSecond"];
-    vc.ArrayItems=ArrayItms;
+    vc.ArrayItems=arrayItms;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -53,7 +53,7 @@
                   substringFromIndex:(range2.location+range2.length)];
     user_Id=[curUrl substringFromIndex:
              (range3.location+range3.length)];
-    [[self.view viewWithTag:1024] removeFromSuperview];
+    [[self.view viewWithTag:tagWebView] removeFromSuperview];
 }
 
 - (void)viewDidLoad {
@@ -64,7 +64,7 @@
     int clientID=5155977;
     webView = [[UIWebView alloc] initWithFrame:
                CGRectMake(0, 60, 450, 500)];
-    webView.tag = 1024;
+    webView.tag = tagWebView;
     webView.delegate = self;
     [self.view addSubview:webView];
     NSString *fullURL = [NSString stringWithFormat:
