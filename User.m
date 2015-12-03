@@ -12,7 +12,7 @@
 @end
 @implementation User
 
--(NSMutableArray*)getImages:(NSArray*)arrIm
+-(NSMutableArray*)downloadImages:(NSArray*)arrIm
 {
     return nil;
 }

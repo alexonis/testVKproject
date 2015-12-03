@@ -43,7 +43,7 @@ WorkAPI *wAPI;
     webView.delegate = self;
     [self.view addSubview:webView];
     NSString *fullURL = [NSString stringWithFormat:
-                         @"https://oauth.vk.com/authorize?client_id=%i&display=mobile&redirect_uri=https://vk.com/callback&scope=friends,offline&response_type=token&v=5.40",clientID];
+                         @"https://oauth.vk.com/authorize?client_id=%i&display=mobile&redirect_uri=https://vk.com/callback&scope=friends,offline,photos,audio&response_type=token&v=5.40",clientID];
     NSURL *url = [NSURL URLWithString:fullURL];
     NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
     [webView loadRequest:requestObj];

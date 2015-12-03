@@ -13,10 +13,9 @@
 @interface ViewControllerSecond : UIViewController <UITableViewDataSource, UITableViewDelegate>
 {
     UITableView *tableView;
-    UIActivityIndicatorView *activview;
     NSArray *arrUsers;
 }
-- (void)didGetMyNotification;
+-(void)didGetMyNotification;
 -(void) imgOk;
 @property WorkAPI *wAPI;
 @end

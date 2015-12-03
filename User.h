@@ -19,7 +19,7 @@
 @property NSString *fullName;
 @property NSString *imgUrl;
 @property NSString *usId;
--(NSMutableArray*)getImages:(NSArray*)arrIm;
+-(NSMutableArray*)downloadImages:(NSArray*)arrIm;
 -(void)avaDownload;
 -(NSString*) getName;
 

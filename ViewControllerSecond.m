@@ -14,8 +14,6 @@ const static int tagTbl=666;
 User *user;
 @implementation ViewControllerSecond
 
-
-
 - (void)didGetMyNotification{
     
     arrUsers=[self.wAPI parser];
@@ -23,7 +21,6 @@ User *user;
 }
 -(void)imgOk
 {
-    NSLog(@"Hello!");
     //[tableView reloadData];
 }
 - (void)dealloc {
@@ -31,13 +28,12 @@ User *user;
 }
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"%lu",(unsigned long)[arrUsers count]);
     return [arrUsers count];
 }
 
 -(UITableViewCell *) tableView:(UITableView *) tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    NSLog(@"%@,  %li",[[arrUsers objectAtIndex:indexPath.row ] getName],(long)indexPath.row);
+    //NSLog(@"%@,  %li",[[arrUsers objectAtIndex:indexPath.row ] getName],(long)indexPath.row);
     NSString *sIdentify=@"friends";
     UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:sIdentify];
     if (cell==nil) {
@@ -64,7 +60,6 @@ User *user;
                                              selector:@selector(imgOk)
                                                  name:@"ImageDownload"
                                                object:nil];
-    
     tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 70, 400, 660)];
     [self.view addSubview:tableView];
     tableView.tag=tagTbl;

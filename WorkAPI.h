@@ -21,5 +21,6 @@
 @property NSString* user_Id;
 -(NSMutableArray*) parser;
 -(void)getUsers;
+-(void)getImages;
 @end
 
