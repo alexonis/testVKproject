@@ -7,11 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WorkAPI.h"
+#import "User.h"
 
 @interface ViewControllerSecond : UIViewController <UITableViewDataSource, UITableViewDelegate>
 {
-IBOutlet UITableView *tableView;
+    UITableView *tableView;
+    UIActivityIndicatorView *activview;
+    NSArray *arrUsers;
 }
--(NSMutableArray*)parser: (NSArray*)array;
-@property NSArray *arrayItems;
+- (void)didGetMyNotification;
+-(void) imgOk;
+@property WorkAPI *wAPI;
 @end

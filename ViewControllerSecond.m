@@ -10,28 +10,34 @@
 
 @interface ViewControllerSecond ()
 @end
-NSMutableArray *arraF;
+const static int tagTbl=666;
+User *user;
 @implementation ViewControllerSecond
--(NSMutableArray*) parser:(NSArray*) array
+
+
+
+- (void)didGetMyNotification{
+    
+    arrUsers=[self.wAPI parser];
+    [tableView reloadData];
+}
+-(void)imgOk
 {
-    NSMutableArray *arFin=[NSMutableArray arrayWithCapacity:[array count]];;
-    NSString *strF;
-    for( NSDictionary *friend in array)
-    {
-        strF=[NSString stringWithFormat:@"%@ %@",
-              [friend objectForKey:@"first_name"],
-              [friend objectForKey:@"last_name"]];
-        [arFin addObject:strF];
-    }
-    return arFin;
+    NSLog(@"Hello!");
+    //[tableView reloadData];
+}
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.arrayItems count];
+    NSLog(@"%lu",(unsigned long)[arrUsers count]);
+    return [arrUsers count];
 }
 
 -(UITableViewCell *) tableView:(UITableView *) tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
+    NSLog(@"%@,  %li",[[arrUsers objectAtIndex:indexPath.row ] getName],(long)indexPath.row);
     NSString *sIdentify=@"friends";
     UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:sIdentify];
     if (cell==nil) {
@@ -39,15 +45,32 @@ NSMutableArray *arraF;
               UITableViewCellStyleDefault
                                     reuseIdentifier:sIdentify];
     }
-    cell.textLabel.text=[arraF objectAtIndex:indexPath.row];
+    user=[arrUsers objectAtIndex:indexPath.row ];
+    cell.textLabel.text=[[arrUsers objectAtIndex:indexPath.row ] getName];
+    [[arrUsers objectAtIndex:indexPath.row ] avaDownload];
+    cell.imageView.image=user->avaImg;
     return cell;
 }
 
 - (void)viewDidLoad {
     self.title=@"Friends";
+    [self.wAPI getUsers];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didGetMyNotification)
+                                                 name:@"MyNotification"
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(imgOk)
+                                                 name:@"ImageDownload"
+                                               object:nil];
+    
+    tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 70, 400, 660)];
+    [self.view addSubview:tableView];
+    tableView.tag=tagTbl;
     tableView.delegate=self;
     tableView.dataSource=self;
-    arraF=[self parser:self.arrayItems];
+    
 }
 
 

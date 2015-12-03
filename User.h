@@ -7,14 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface User : NSObject
 {
-    NSString *fullName;
-    NSURL *imgUrl;
-    NSInteger *usId;
     NSArray *imgsUsr_url;
-    NSArray *imges;    
+    NSArray *imgeUs;
+@public
+    UIImage *avaImg;
 }
+@property NSString *fullName;
+@property NSString *imgUrl;
+@property NSString *usId;
 -(NSMutableArray*)getImages:(NSArray*)arrIm;
+-(void)avaDownload;
+-(NSString*) getName;
+
 @end

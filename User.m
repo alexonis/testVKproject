@@ -16,5 +16,15 @@
 {
     return nil;
 }
-
+-(NSString*) getName
+{
+    return self.fullName;
+}
+-(void)avaDownload
+{
+    NSURL *urlIM=[NSURL URLWithString:self.imgUrl];
+    NSData *dataIm=[NSData dataWithContentsOfURL:urlIM];
+    avaImg=[UIImage imageWithData:dataIm];
+       [[NSNotificationCenter defaultCenter] postNotificationName:@"ImageDownload" object:nil];
+}
 @end
