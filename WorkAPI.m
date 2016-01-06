@@ -57,13 +57,13 @@ int whatIdo=0;
                                  initWithRequest:request delegate:self];
     [theConnect start];
 }
--(void) getMessag: (NSString*)idUser
+-(void) getMessag
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     whatIdo=3;
     dataVK = [NSMutableData data];
     NSString *urlS=[NSString stringWithFormat:
-                    @"https://api.vk.com/method/messages.getHistory?user_id=%@&v=5.40&access_token=%@",idUser,[userDefaults objectForKey:@"token"]];
+                    @"https://api.vk.com/method/messages.getHistory?user_id=%@&v=5.40&access_token=%@",self.usertmp.usId,[userDefaults objectForKey:@"token"]];
     NSURL *url=[NSURL URLWithString:urlS];
     NSURLRequest *request =[NSURLRequest requestWithURL:url];
     NSURLConnection *theConnect=[[NSURLConnection alloc]
@@ -95,6 +95,7 @@ int whatIdo=0;
         NSString *str=[NSString alloc];
         str = [NSString stringWithFormat:@"%@",
                          messag[@"body"]];
+        NSLog(@"%@",str);
         [arFin addObject:str];
     }
     return arFin;
@@ -178,8 +179,8 @@ int whatIdo=0;
                                   error:&error];
             arrMsg =json[@"response"][@"items"] ;
              self.usertmp.msgHist=[self parserMessag];
-            
             [[NSNotificationCenter defaultCenter] postNotificationName:@"MyNotification" object:nil];
+            NSLog(@"%@",@"appired");
         }
             break;
         default:

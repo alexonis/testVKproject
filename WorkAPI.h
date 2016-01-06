@@ -24,7 +24,7 @@
 -(NSMutableArray*) parserUser;
 -(NSMutableArray*) parserImages;
 -(NSMutableArray*) parserMessag;
--(void)getMessag:(NSString*)idUser;
+-(void)getMessag;
 -(void)getUsers;
 -(void)getImages:(int) imgNext;
 -(void)sendMsg:(NSString*)message andId:(NSString*)idUser;
