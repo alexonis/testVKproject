@@ -11,16 +11,20 @@
 
 @interface User : NSObject
 {
-    NSArray *imgsUsr_url;
-    NSArray *imgeUs;
-@public
-    UIImage *avaImg;
+@public   UIImage *avaImg;
 }
+@property int colvoImg;
+@property NSArray *imgsUsr_url;
+@property NSArray *msgHist;
+@property NSArray *imageUser;
 @property NSString *fullName;
 @property NSString *imgUrl;
 @property NSString *usId;
--(NSMutableArray*)downloadImages:(NSArray*)arrIm;
--(void)avaDownload;
+-(UIImage*)imgDownload:(NSString*)imgsUr;
 -(NSString*) getName;
+-(NSMutableArray*) getMessage;
+-(void)sendMsg:(NSString*) message;
+-(void)avaDownload;
+-(void)getUserImages:(int) imgNext;
 
 @end
