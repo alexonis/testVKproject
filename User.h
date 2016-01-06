@@ -19,7 +19,7 @@
 @property NSString *usId;
 -(UIImage*)imgDownload:(NSString*)imgsUr;
 -(NSString*) getName;
--(NSMutableArray*) getMessage;
+-(void) getMessage;
 -(void)sendMsg:(NSString*) message;
 -(void)avaDownload;
 -(void)getUserImages:(int) imgNext;

@@ -17,6 +17,9 @@ const int tagBtn=999;
 @implementation ViewControllerThred
 -(void) downloadMsg
 {
+    NSLog(@"%@", @"Aloha");
+    [historyMessage addObjectsFromArray:self.userTmp.msgHist];
+    NSLog(@"%lu", [self.userTmp.msgHist count]);
     [tableView reloadData];
 }
 - (void)viewDidLoad {
@@ -26,7 +29,7 @@ const int tagBtn=999;
                                                  name:@"MyNotification"
                                                object:nil];
     historyMessage=[[NSMutableArray alloc] init];
-    [historyMessage addObject:[self.userTmp getMessage]];
+    [self.userTmp getMessage];
     self.title=self.userTmp.fullName;
     tableView=[[UITableView alloc] initWithFrame:
                CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-50)];
@@ -58,11 +61,12 @@ const int tagBtn=999;
 }
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    NSLog(@"%lu", [historyMessage count]);
     return [historyMessage count];
 }
 -(UITableViewCell *) tableView:(UITableView *) tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    //NSLog(@"%@")
+    NSLog(@"%@",@"111");
     NSString *cellIdentifier=@"Message";
     UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell==nil)
@@ -73,7 +77,7 @@ const int tagBtn=999;
               reuseIdentifier:cellIdentifier];
     }
     
-    cell.textLabel.text =historyMessage [indexPath.row];
+    cell.textLabel.text =historyMessage [[historyMessage count]-indexPath.row-1];
     
     return cell;
 

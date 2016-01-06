@@ -23,11 +23,12 @@ WorkAPI *work;
 {
     return self.fullName;
 }
--(NSMutableArray*) getMessage
+-(void) getMessage
 {
     work=[WorkAPI alloc];
     work.usertmp=self;
-    return self.msgHist;
+    [work getMessag];
+
 }
 -(void)avaDownload
 {
