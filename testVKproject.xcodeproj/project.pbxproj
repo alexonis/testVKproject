@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		664D07771C139128000FD141 /* notavatar.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 664D07761C139128000FD141 /* notavatar.jpeg */; };
 		924777BE1BFE78810077D501 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 924777BD1BFE78810077D501 /* main.m */; };
 		924777C11BFE78810077D501 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 924777C01BFE78810077D501 /* AppDelegate.m */; };
 		924777C41BFE78810077D501 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 924777C31BFE78810077D501 /* ViewController.m */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		664D07761C139128000FD141 /* notavatar.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = notavatar.jpeg; sourceTree = "<group>"; };
 		924777B91BFE78810077D501 /* testVKproject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testVKproject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		924777BD1BFE78810077D501 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		924777BF1BFE78810077D501 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 		924777BC1BFE78810077D501 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				664D07761C139128000FD141 /* notavatar.jpeg */,
 				924777BD1BFE78810077D501 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -260,6 +263,7 @@
 			files = (
 				924777CC1BFE78810077D501 /* LaunchScreen.storyboard in Resources */,
 				924777C91BFE78810077D501 /* Assets.xcassets in Resources */,
+				664D07771C139128000FD141 /* notavatar.jpeg in Resources */,
 				924777C71BFE78810077D501 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -15,12 +15,12 @@
     NSMutableData* dataVK;
     NSArray* arrUser;
 @public
-    BOOL *flag;
+    BOOL *flag; // Что за флаг ? Что он делает?
 }
-@property NSString* access_token;
+@property NSString* access_token; // Лучше записывать так @property(strong, nonotamic) NSString* access_token
 @property NSString* user_Id;
 -(NSMutableArray*) parser;
--(void)getUsers;
+-(void)getUsers; // getUser ? get значит получать, что и как мы получаем?
 -(void)getImages;
 @end
 

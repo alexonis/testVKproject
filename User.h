@@ -16,6 +16,7 @@
 @public
     UIImage *avaImg;
 }
+
 @property NSString *fullName;
 @property NSString *imgUrl;
 @property NSString *usId;
