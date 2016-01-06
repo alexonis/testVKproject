@@ -21,6 +21,7 @@
 		925ABA381C3A8ED400875325 /* ViewControllerThred.m in Sources */ = {isa = PBXBuildFile; fileRef = 925ABA371C3A8ED400875325 /* ViewControllerThred.m */; };
 		925ABA3B1C3ADD3000875325 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 925ABA3A1C3ADD3000875325 /* TableViewCell.m */; };
 		9271B7141C15D3E000B48C3D /* notavatar.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9271B7131C15D3E000B48C3D /* notavatar.jpeg */; };
+		927862DE1C3DA06B00055302 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 927862DD1C3DA06B00055302 /* TableViewCell.xib */; };
 		92C350DF1C0F109E004F4CA6 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 92C350DE1C0F109E004F4CA6 /* User.m */; };
 		92C350E21C0F15E2004F4CA6 /* WorkAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 92C350E11C0F15E2004F4CA6 /* WorkAPI.m */; };
 /* End PBXBuildFile section */
@@ -70,6 +71,7 @@
 		925ABA391C3ADD3000875325 /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
 		925ABA3A1C3ADD3000875325 /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
 		9271B7131C15D3E000B48C3D /* notavatar.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = notavatar.jpeg; path = ../../../Downloads/testVKproject/testVKproject/notavatar.jpeg; sourceTree = "<group>"; };
+		927862DD1C3DA06B00055302 /* TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		92C350DD1C0F109E004F4CA6 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		92C350DE1C0F109E004F4CA6 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		92C350E01C0F15E2004F4CA6 /* WorkAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkAPI.h; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 		924777B01BFE78810077D501 = {
 			isa = PBXGroup;
 			children = (
+				927862DD1C3DA06B00055302 /* TableViewCell.xib */,
 				925ABA391C3ADD3000875325 /* TableViewCell.h */,
 				925ABA3A1C3ADD3000875325 /* TableViewCell.m */,
 				922840841C3323590054BE13 /* CollectionViewCell.h */,
@@ -298,6 +301,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				924777CC1BFE78810077D501 /* LaunchScreen.storyboard in Resources */,
+				927862DE1C3DA06B00055302 /* TableViewCell.xib in Resources */,
 				924777C91BFE78810077D501 /* Assets.xcassets in Resources */,
 				9271B7141C15D3E000B48C3D /* notavatar.jpeg in Resources */,
 				924777C71BFE78810077D501 /* Main.storyboard in Resources */,

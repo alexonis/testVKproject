@@ -70,7 +70,20 @@ int whatIdo=0;
                                  initWithRequest:request
                                  delegate:self];
     [theConnect start];
-    
+}
+-(void) getMySelf
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    whatIdo=4;
+    dataVK = [NSMutableData data];
+    NSString *urlS=[NSString stringWithFormat:
+                    @"https://api.vk.com/method/users.get?user_id=%@&fields=photo_50&v=5.42&access_token=%@",[userDefaults objectForKey:@"myId"],[userDefaults objectForKey:@"token"]];
+    NSURL *url=[NSURL URLWithString:urlS];
+    NSURLRequest *request =[NSURLRequest requestWithURL:url];
+    NSURLConnection *theConnect=[[NSURLConnection alloc]
+                                 initWithRequest:request
+                                 delegate:self];
+    [theConnect start];
 }
 -(NSMutableArray*) parserUser
 {
@@ -85,6 +98,7 @@ int whatIdo=0;
         user.usId = friend[@"id"];
         [arFin addObject:user];
     }
+    //[self getMySelf];
     return arFin;
 }
 -(NSMutableArray*) parserMessag
@@ -93,9 +107,9 @@ int whatIdo=0;
     for( NSDictionary *messag in arrMsg)
     {
         NSString *str=[NSString alloc];
-        str = [NSString stringWithFormat:@"%@",
-                         messag[@"body"]];
-        NSLog(@"%@",str);
+        str = [NSString stringWithFormat:@"%@%@",
+                         messag[@"body"]
+                        ,messag[@"out"]];
         [arFin addObject:str];
     }
     return arFin;
@@ -120,7 +134,18 @@ int whatIdo=0;
     }
     return arphotos;
 }
+-(User*) parserMyself:(NSDictionary*) mySelf
+{
+    //NSLog(@"%@",mySelf[@"response"]);
+        User *user=[[User alloc] init];
+       // user.fullName = [NSString stringWithFormat:@"%@ %@",
+       //                  mySelf[@"first_name"],
+        //                 mySelf[@"last_name"]];
+        user.imgUrl = mySelf[@"photo_50"];
+        user.usId = mySelf[@"id"];
 
+    return user;
+}
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
     [dataVK setLength:0];
@@ -142,6 +167,7 @@ int whatIdo=0;
     switch (whatIdo)
     {
         case 0:
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"SendComplite" object:nil];
             NSLog(@"%@", [[NSString alloc] initWithData:dataVK encoding:NSUTF8StringEncoding]);
             break;
         case 1:
@@ -151,7 +177,6 @@ int whatIdo=0;
                                   JSONObjectWithData:dataVK
                                   options:kNilOptions
                                   error:&error];
-            //NSLog(@"%@", [[NSString alloc] initWithData:dataVK encoding:NSUTF8StringEncoding]);
              arrUserJson=json[@"response"][@"items"];
              [[NSNotificationCenter defaultCenter] postNotificationName:@"MyNotification" object:nil];
         }
@@ -166,12 +191,12 @@ int whatIdo=0;
             arrUserJsonImg =json[@"response"] ;
             self.usertmp.imgsUsr_url =[self parserImages];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"MyNotification" object:nil];
+            
         }
             break;
         case 3:
         {
             NSLog(@"%@",@"ALOHADANCE");
-            NSLog(@"%@", [[NSString alloc] initWithData:dataVK encoding:NSUTF8StringEncoding]);
             NSError *error;
             NSDictionary *json = [NSJSONSerialization
                                   JSONObjectWithData:dataVK
@@ -182,6 +207,19 @@ int whatIdo=0;
             [[NSNotificationCenter defaultCenter] postNotificationName:@"MyNotification" object:nil];
             NSLog(@"%@",@"appired");
         }
+            break;
+        case 4:
+        {
+            NSError *error;
+            NSDictionary *jsonMY = [NSJSONSerialization
+                                  JSONObjectWithData:dataVK
+                                  options:kNilOptions
+                                  error:&error];
+            User *myself=[self parserMyself:jsonMY[@"response"]];
+            [myself avaDownload];
+            self.myPhoto= myself->avaImg;
+        }
+            
             break;
         default:
             break;

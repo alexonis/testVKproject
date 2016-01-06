@@ -9,15 +9,17 @@
 #import "ViewController.h"
 #import "ViewControllerSecond.h"
 #import "WorkAPI.h"
+#import "User.h"
 @interface ViewController ()
 
 @end
 const NSInteger tagWebView=1024;
 
 @implementation ViewController
+
 WorkAPI *wAPI;
 NSUserDefaults *userDefaults;
-
+User* myself;
 - (void)viewDidLoad {
     [super viewDidLoad];
     wAPI=[WorkAPI alloc];
@@ -29,6 +31,7 @@ NSUserDefaults *userDefaults;
         vc.wAPI=wAPI;
         [self.navigationController pushViewController:vc animated:YES];
     }
+    
 }
 
 - (void)didReceiveMemoryWarning {

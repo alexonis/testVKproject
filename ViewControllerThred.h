@@ -21,4 +21,5 @@
 @property User *userTmp;
 -(void) btnSend;
 -(void) downloadMsg;
+-(void) requestMesg;
 @end

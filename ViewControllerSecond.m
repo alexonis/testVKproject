@@ -36,7 +36,6 @@ CollectionViewController *cvc;
 - (void)downloadUsersComplete{
     arrUsers=[self.wAPI parserUser];
     [tableView reloadData];
-    
 }
 
 - (void)didReceiveMemoryWarning {

@@ -7,26 +7,38 @@
 //
 
 #import "ViewControllerThred.h"
-
+#import "WorkAPI.h"
 @interface ViewControllerThred ()
 
 @end
 const int tagTbl=333;
 const int tagTxf=666;
 const int tagBtn=999;
+NSString *tmpStr;
+
 @implementation ViewControllerThred
+-(void) requestMesg
+{
+    [self.userTmp getMessage];
+}
 -(void) downloadMsg
 {
-    NSLog(@"%@", @"Aloha");
+    [historyMessage removeAllObjects];
     [historyMessage addObjectsFromArray:self.userTmp.msgHist];
-    NSLog(@"%lu", [self.userTmp.msgHist count]);
     [tableView reloadData];
+    CGPoint bottomOffset = CGPointMake(0, tableView.contentSize.height - tableView.bounds.size.height);
+    [tableView setContentOffset:bottomOffset animated:NO];
+    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(downloadMsg)
                                                  name:@"MyNotification"
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(requestMesg)
+                                                 name:@"SendComplite"
                                                object:nil];
     historyMessage=[[NSMutableArray alloc] init];
     [self.userTmp getMessage];
@@ -47,26 +59,34 @@ const int tagBtn=999;
     tableView.tag=tagTbl;
     tableView.delegate=self;
     tableView.dataSource=self;
-
+    interPhoto=self.userTmp->avaImg;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+-(void) btnSend
+{
 
+    NSCharacterSet* charetSet=[NSCharacterSet characterSetWithCharactersInString:@" "];
+    NSString* resultStr= (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)textMsg.text,NULL,NULL,kCFStringEncodingUTF8));
+    resultStr=[[resultStr componentsSeparatedByCharactersInSet:charetSet]
+                       componentsJoinedByString:@"+"];
+    [self.userTmp sendMsg:resultStr];
+    textMsg.text=nil;
+    
+}
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"%lu", [historyMessage count]);
     return [historyMessage count];
 }
 -(UITableViewCell *) tableView:(UITableView *) tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    NSLog(@"%@",@"111");
     NSString *cellIdentifier=@"Message";
     UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell==nil)
@@ -76,15 +96,20 @@ const int tagBtn=999;
               UITableViewCellStyleDefault
               reuseIdentifier:cellIdentifier];
     }
-    
-    cell.textLabel.text =historyMessage [[historyMessage count]-indexPath.row-1];
-    
+    cell.textLabel.text =[historyMessage [[historyMessage count]-indexPath.row-1] substringToIndex:[historyMessage[[historyMessage count]-indexPath.row-1]length]-1];
+    tmpStr=[historyMessage[[historyMessage count]-indexPath.row-1] substringFromIndex:[historyMessage[[historyMessage count]-indexPath.row-1]length]-1];
+    if ([tmpStr isEqual:@"0"]) {
+        
+        cell.imageView.image=interPhoto;
+        
+    }
+    else
+    {
+        cell.imageView.image=myPhoto;
+    }
+
     return cell;
 
-}
--(void) btnSend
-{
-    [self.userTmp sendMsg:textMsg.text];
 }
 
 /*
