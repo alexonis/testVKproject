@@ -7,6 +7,8 @@
 //
 
 #import "ViewControllerSecond.h"
+#import "CollectionViewController.h"
+#import "ViewControllerThred.h"
 
 @interface ViewControllerSecond ()
 @end
@@ -36,8 +38,11 @@ const static int tagTbl=666;
 
 - (void)didGetMyNotification{
     
-    arrUsers=[self.wAPI parser];
+}
+- (void)downloadUsersComplete{
+    arrUsers=[self.wAPI parserUser];
     [tableView reloadData];
+    
 }
 
 
@@ -50,13 +55,14 @@ const static int tagTbl=666;
 
 -(UITableViewCell *)tableView:(UITableView *) tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    //NSLog(@"%@,  %li",[[arrUsers objectAtIndex:indexPath.row ] getName],(long)indexPath.row);
     NSString *sIdentify=@"friends";
     UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:sIdentify];
-    if (cell==nil) {
-        cell=[[UITableViewCell alloc] initWithStyle:
+    if (cell==nil)
+    {
+        cell=[[UITableViewCell alloc]
+              initWithStyle:
               UITableViewCellStyleDefault
-                                    reuseIdentifier:sIdentify];
+              reuseIdentifier:sIdentify];
     }
     
     User* user= arrUsers[indexPath.row];

@@ -8,7 +8,7 @@
 
 #import "WorkAPI.h"
 #import "User.h"
-
+Boolean *friensorphoto;
 @implementation WorkAPI
 
 

@@ -15,7 +15,6 @@
     UITableView *tableView;
     NSArray *arrUsers;
 }
--(void)didGetMyNotification;
--(void) imgOk;
+-(void)downloadUsersComplete;
 @property WorkAPI *wAPI;
 @end

@@ -7,18 +7,27 @@
 //
 
 #import "User.h"
-
+#import "WorkAPI.h"
 @interface User()
 @end
+WorkAPI *work;
 @implementation User
 
--(NSMutableArray*)downloadImages:(NSArray*)arrIm
+-(UIImage*)imgDownload:(NSString*)imgsUr
 {
-    return nil;
+    NSURL *urlIM=[NSURL URLWithString:imgsUr];
+    NSData *dataIm=[NSData dataWithContentsOfURL:urlIM];
+    return[UIImage imageWithData:dataIm];
 }
 -(NSString*) getName
 {
     return self.fullName;
+}
+-(NSMutableArray*) getMessage
+{
+    work=[WorkAPI alloc];
+    work.usertmp=self;
+    return self.msgHist;
 }
 -(void)avaDownload
 {

@@ -8,12 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-
+#import "User.h"
 
 @interface WorkAPI : NSObject<NSURLConnectionDelegate>
 {
     NSMutableData* dataVK;
-    NSArray* arrUser;
+    NSArray* arrUserJson;
+    NSArray* arrMsg;
+    NSMutableArray* arrUserJsonImg;
 @public
     BOOL *flag; // Что за флаг ? Что он делает?
 }
