@@ -16,10 +16,8 @@
 const NSInteger tagWebView=1024;
 
 @implementation ViewController
-
 WorkAPI *wAPI;
 NSUserDefaults *userDefaults;
-User* myself;
 - (void)viewDidLoad {
     [super viewDidLoad];
     wAPI=[WorkAPI alloc];

@@ -13,7 +13,6 @@
     NSString* access_token;
     NSString* user_Id;
     UIWebView* webView;
-    NSMutableData* dataVK;
 }
 -(IBAction)connectVK:(id)sender;
 -(IBAction)GetFriends:(id)sender;

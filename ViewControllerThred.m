@@ -8,15 +8,19 @@
 
 #import "ViewControllerThred.h"
 #import "WorkAPI.h"
+#import "MyStrig.h"
+
 @interface ViewControllerThred ()
 
 @end
 const int tagTbl=333;
 const int tagTxf=666;
 const int tagBtn=999;
-NSString *tmpStr;
+
+MyStrig* strTmp;
 
 @implementation ViewControllerThred
+
 -(void) requestMesg
 {
     [self.userTmp getMessage];
@@ -28,13 +32,13 @@ NSString *tmpStr;
     [tableView reloadData];
     CGPoint bottomOffset = CGPointMake(0, tableView.contentSize.height - tableView.bounds.size.height);
     [tableView setContentOffset:bottomOffset animated:NO];
-    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    strTmp=[MyStrig alloc];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(downloadMsg)
-                                                 name:@"MyNotification"
+                                                 name:@"GetHistoryComplete"
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(requestMesg)
@@ -62,6 +66,12 @@ NSString *tmpStr;
     interPhoto=self.userTmp->avaImg;
 }
 
+- (void)dealloc {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -87,6 +97,7 @@ NSString *tmpStr;
 }
 -(UITableViewCell *) tableView:(UITableView *) tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
+    strTmp=historyMessage [[historyMessage count]-indexPath.row-1];
     NSString *cellIdentifier=@"Message";
     UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell==nil)
@@ -96,18 +107,15 @@ NSString *tmpStr;
               UITableViewCellStyleDefault
               reuseIdentifier:cellIdentifier];
     }
-    cell.textLabel.text =[historyMessage [[historyMessage count]-indexPath.row-1] substringToIndex:[historyMessage[[historyMessage count]-indexPath.row-1]length]-1];
-    tmpStr=[historyMessage[[historyMessage count]-indexPath.row-1] substringFromIndex:[historyMessage[[historyMessage count]-indexPath.row-1]length]-1];
-    if ([tmpStr isEqual:@"0"]) {
+    cell.textLabel.text =strTmp.mainString;
+    if ([strTmp.outString isEqual:@"0"]) {
         
         cell.imageView.image=interPhoto;
-        
     }
     else
     {
         cell.imageView.image=myPhoto;
     }
-
     return cell;
 
 }

@@ -9,12 +9,13 @@
 #import "ViewControllerSecond.h"
 #import "CollectionViewController.h"
 #import "ViewControllerThred.h"
+#import "TakeMySelf.h"
 
 @interface ViewControllerSecond ()
 @end
 const static int tagTbl=666;
-User *user;
 CollectionViewController *cvc;
+TakeMySelf* myself;
 @implementation ViewControllerSecond
 
 - (void)viewDidLoad {
@@ -23,7 +24,7 @@ CollectionViewController *cvc;
     [self.wAPI getUsers];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(downloadUsersComplete)
-                                                 name:@"MyNotification"
+                                                 name:@"GetUserComlete"
                                                object:nil];
     tableView=[[UITableView alloc] initWithFrame:
                CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
@@ -36,6 +37,7 @@ CollectionViewController *cvc;
 - (void)downloadUsersComplete{
     arrUsers=[self.wAPI parserUser];
     [tableView reloadData];
+    myself=[[TakeMySelf alloc] init];
 }
 
 - (void)didReceiveMemoryWarning {
