@@ -15,6 +15,7 @@
 @end
 const static int tagTbl=666;
 TakeMySelf*  myself;
+User* sendUser;
 @implementation ViewControllerSecond
 
 - (void)viewDidLoad {
@@ -57,17 +58,42 @@ TakeMySelf*  myself;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    sendUser=[arrUsers objectAtIndex:indexPath.row];
+    UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:@"What do you choose...?"
+                                                       message:sendUser.fullName
+                                                      delegate:self
+                                             cancelButtonTitle:@"Message"
+                                             otherButtonTitles:@"Show Photos", nil];
+    [theAlert show];
     
-    ViewControllerThred *vc;
-    vc=[self.storyboard instantiateViewControllerWithIdentifier:@"ViewControllerThred"];
-    vc.userTmp=[arrUsers objectAtIndex:indexPath.row];
-    vc.my=myself;
-    [self.navigationController pushViewController:vc animated:YES];
+    //ViewControllerThred *vc;
+    //vc=[self.storyboard instantiateViewControllerWithIdentifier:@"ViewControllerThred"];
+    //vc.userTmp=[arrUsers objectAtIndex:indexPath.row];
+    //vc.my=myself;
+    //[self.navigationController pushViewController:vc animated:YES];
     /*CollectionViewController *cvc;
     cvc=[self.storyboard instantiateViewControllerWithIdentifier:@"CollectionViewController"];
     cvc.userI=[arrUsers objectAtIndex:indexPath.row ];
     [self.navigationController pushViewController:cvc animated:YES];*/
     
+}
+- (void)alertView:(UIAlertView *)theAlert clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if ([[theAlert buttonTitleAtIndex:buttonIndex] isEqual:@"Message"]) {
+        ViewControllerThred *vc;
+        vc=[self.storyboard instantiateViewControllerWithIdentifier:@"ViewControllerThred"];
+        vc.userTmp=sendUser;
+        vc.my=myself;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else
+    {
+        CollectionViewController *cvc;
+        cvc=[self.storyboard instantiateViewControllerWithIdentifier:@"CollectionViewController"];
+        cvc.userI=sendUser;
+        [self.navigationController pushViewController:cvc animated:YES];
+    }
+    NSLog(@"%@ ", [theAlert buttonTitleAtIndex:buttonIndex]);
 }
 
 -(UITableViewCell *) tableView:(UITableView *) tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
