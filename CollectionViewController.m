@@ -31,7 +31,7 @@ static NSString * const reuseIdentifier = @"Cell";
     imgs=[[NSMutableArray alloc]init];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(downloadImgComplete)
-                                                 name:@"MyNotification"
+                                                 name:@"GetImagesComplete"
                                                object:nil];
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;

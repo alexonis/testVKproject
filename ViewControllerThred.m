@@ -8,16 +8,14 @@
 
 #import "ViewControllerThred.h"
 #import "WorkAPI.h"
-#import "MyStrig.h"
-
+#import "Messages.h"
+#import "MyCustomCell.h"
 @interface ViewControllerThred ()
 
 @end
 const int tagTbl=333;
 const int tagTxf=666;
 const int tagBtn=999;
-
-MyStrig* strTmp;
 
 @implementation ViewControllerThred
 
@@ -35,20 +33,22 @@ MyStrig* strTmp;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    strTmp=[MyStrig alloc];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(downloadMsg)
                                                  name:@"GetHistoryComplete"
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(requestMesg)
-                                                 name:@"SendComplite"
+                                                 name:@"SendComplete"
                                                object:nil];
     historyMessage=[[NSMutableArray alloc] init];
     [self.userTmp getMessage];
     self.title=self.userTmp.fullName;
     tableView=[[UITableView alloc] initWithFrame:
                CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-50)];
+    tableView.tag=tagTbl;
+    tableView.delegate=self;
+    tableView.dataSource=self;
     [self.view addSubview:tableView];
     textMsg=[[UITextField alloc] initWithFrame:CGRectMake(10, tableView.frame.size.height, 320, 40)];
     textMsg.tag=tagTxf;
@@ -60,10 +60,8 @@ MyStrig* strTmp;
     sendBtn.center = CGPointMake(350,tableView.frame.size.height+20);
     [sendBtn addTarget:self action:@selector(btnSend) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:sendBtn];
-    tableView.tag=tagTbl;
-    tableView.delegate=self;
-    tableView.dataSource=self;
     interPhoto=self.userTmp->avaImg;
+    myPhoto=self.my->myImage;
 }
 
 - (void)dealloc {
@@ -93,21 +91,35 @@ MyStrig* strTmp;
 }
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    historyMessage=[[historyMessage reverseObjectEnumerator] allObjects];
     return [historyMessage count];
 }
--(UITableViewCell *) tableView:(UITableView *) tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+-(MyCustomCell *) tableView:(UITableView *) tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    strTmp=historyMessage [[historyMessage count]-indexPath.row-1];
+    
+    Messages* strTmp=[Messages alloc];
+    strTmp=historyMessage[indexPath.row];
+    [strTmp TakeAttachementImg];
+    if ([strTmp.mainString isEqual:@""]) {
+        strTmp.mainString=@"Attachment";
+    }
     NSString *cellIdentifier=@"Message";
-    UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    MyCustomCell *cell =[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell==nil)
     {
-        cell=[[UITableViewCell alloc]
+        cell=[[MyCustomCell alloc]
               initWithStyle:
               UITableViewCellStyleDefault
               reuseIdentifier:cellIdentifier];
     }
+    [cell createCell:strTmp];
+    //cell.labelMessage.text=strTmp.mainString;
+    //cell.labelMessage.numberOfLines=0;
+    //[cell.labelMessage sizeToFit];
     cell.textLabel.text =strTmp.mainString;
+    cell.textLabel.numberOfLines=0;
+    [cell.textLabel sizeToFit];
+   // cell.textLabel.backgroundColor=[UIColor blueColor];
     if ([strTmp.outString isEqual:@"0"]) {
         
         cell.imageView.image=interPhoto;
@@ -118,6 +130,25 @@ MyStrig* strTmp;
     }
     return cell;
 
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    Messages *strTmp=[Messages alloc];
+    strTmp= historyMessage [[historyMessage count]-indexPath.row-1];
+    UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width/2, 40)];
+    label.numberOfLines=0;
+    label.text=strTmp.mainString;
+    [label sizeToFit];
+   // if (label.frame.size.height >= 40.0)
+   // {
+        //NSLog(@"%f",label.frame.size.height);
+ //       return label.frame.size.height;
+ //   }
+  //  else
+  //  {
+        return 200.0;
+  //  }
+    
 }
 
 /*

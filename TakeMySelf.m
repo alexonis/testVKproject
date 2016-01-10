@@ -14,14 +14,7 @@ NSUserDefaults *userDefaults;
 NSMutableData*  Vk;
 -(TakeMySelf*) init
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{ // Загрузка в другом потоке
-        [self getMySelf];
-        dispatch_async(dispatch_get_main_queue(), ^{ //Показываем фотографию в основном потоке
-
-        });
-    });
-    //[self takeMyname];
-   // [self takeMyImg];
+    [self getMySelf];
       return self;
 }
 -(void) getMySelf
@@ -30,7 +23,7 @@ NSMutableData*  Vk;
     userDefaults= [NSUserDefaults standardUserDefaults];
     Vk = [NSMutableData data];
     NSString *urlS=[NSString stringWithFormat:
-                    @"https://api.vk.com/method/friends.get?user_id=%@&fields=nickname,photo_50&v=5.40&access_token=%@",[userDefaults objectForKey:@"myId"],[userDefaults objectForKey:@"token"]];
+                    @"https://api.vk.com/method/users.get?user_id=%@&fields=photo_50&v=5.40&access_token=%@",[userDefaults objectForKey:@"myId"],[userDefaults objectForKey:@"token"]];
     NSURL *url=[NSURL URLWithString:urlS];
     NSURLRequest *request =[NSURLRequest requestWithURL:url];
     NSURLConnection *theConnect=[[NSURLConnection alloc]
@@ -40,16 +33,31 @@ NSMutableData*  Vk;
 }
 -(void) takeMyname
 {
-    NSLog(@"%@ !",jsonMY[@"response"]);
-    self.firstName= [NSString stringWithFormat:@"%@",jsonMY[@"first_name"]];
-    self.lastName= [NSString stringWithFormat:@"%@",jsonMY[@"last_name"]];
+    //NSDictionary *my=jsonMY[@"response"][0];
+    self.firstName= [NSString stringWithFormat:@"%@",jsonMY[@"response"][0][@"first_name"]];
+    self.lastName= [NSString stringWithFormat:@"%@",jsonMY[@"response"][0][@"last_name"]];
+        NSLog(@"%@ %@",self.firstName,self.lastName);
 }
 -(void)takeMyImg
 {
     
-    NSURL *urlIM=[NSURL URLWithString:jsonMY[@"photo_50"]];
+    NSURL *urlIM=[NSURL URLWithString:jsonMY[@"response"][0][@"photo_50"]];
     NSData *dataIm=[NSData dataWithContentsOfURL:urlIM];
     myImage=[UIImage imageWithData:dataIm];
+}
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+    [Vk setLength:0];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    [Vk appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    NSLog(@"Connection failed: %@", [error description]);
 }
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
@@ -59,6 +67,9 @@ NSMutableData*  Vk;
                             JSONObjectWithData:Vk
                             options:kNilOptions
                             error:&error];
-    NSLog(@"%@ !",[[NSString alloc] initWithData:Vk encoding:NSUTF8StringEncoding]);
+    
+    //NSLog(@"%@ !",[[NSString alloc] initWithData:Vk encoding:NSUTF8StringEncoding]);
+    [self takeMyname];
+    [self takeMyImg];
 }
 @end

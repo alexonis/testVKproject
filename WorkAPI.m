@@ -8,7 +8,7 @@
 
 #import "WorkAPI.h"
 #import "User.h"
-#import "MyStrig.h"
+#import "Messages.h"
 Boolean *friensorphoto;
 @implementation WorkAPI
 int whatIdo=0;
@@ -64,7 +64,7 @@ int whatIdo=0;
     whatIdo=3;
     dataVK = [NSMutableData data];
     NSString *urlS=[NSString stringWithFormat:
-                    @"https://api.vk.com/method/messages.getHistory?user_id=%@&v=5.40&access_token=%@",self.usertmp.usId,[userDefaults objectForKey:@"token"]];
+                    @"https://api.vk.com/method/messages.getHistory?user_id=%@&count=50&v=5.40&access_token=%@",self.usertmp.usId,[userDefaults objectForKey:@"token"]];
     NSURL *url=[NSURL URLWithString:urlS];
     NSURLRequest *request =[NSURLRequest requestWithURL:url];
     NSURLConnection *theConnect=[[NSURLConnection alloc]
@@ -90,15 +90,25 @@ int whatIdo=0;
 }
 -(NSMutableArray*) parserMessag
 {
-    
     NSMutableArray *arFin=[NSMutableArray arrayWithCapacity:[arrMsg count]];
     for( NSDictionary *messag in arrMsg)
     {
-        MyStrig* str=[MyStrig alloc];
-        str.mainString = [NSString stringWithFormat:@"%@",messag[@"body"]];
-        str.idString = [NSString stringWithFormat:@"%@",messag[@"id"]];
-        str.outString = [NSString stringWithFormat:@"%@",messag[@"out"]];
-        [arFin addObject:str];
+        Messages* mStr=[Messages alloc];
+        mStr.mainString = [NSString stringWithFormat:@"%@",messag[@"body"]];
+        mStr.idString = [NSString stringWithFormat:@"%@",messag[@"id"]];
+        mStr.outString = [NSString stringWithFormat:@"%@",messag[@"out"]];
+        if ([messag valueForKey:@"attachments"]!=nil) {
+            NSLog(@"! %lu", [[messag valueForKey:@"attachments"] count]);
+            if ([[[NSString alloc] initWithString:[messag[@"attachments"]valueForKey:@"type"][0]] isEqual: @"photo"]) {
+                mStr.attachImgURL=[NSMutableArray arrayWithCapacity:[[messag valueForKey:@"attachments"] count]];
+                for( NSDictionary *attachment in [messag valueForKey:@"attachments"])
+                {
+                    [mStr.attachImgURL addObject:[[NSString alloc] initWithString:attachment[@"photo"][@"photo_130"]]];
+                }
+            }
+            
+        }
+        [arFin addObject:mStr];
     }
     return arFin;
 }
@@ -143,8 +153,8 @@ int whatIdo=0;
     switch (whatIdo)
     {
         case 0:
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"SendComplite" object:nil];
             NSLog(@"%@", [[NSString alloc] initWithData:dataVK encoding:NSUTF8StringEncoding]);
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"SendComplete" object:nil];
             break;
         case 1:
         {

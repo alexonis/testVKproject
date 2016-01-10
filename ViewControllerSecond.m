@@ -14,12 +14,10 @@
 @interface ViewControllerSecond ()
 @end
 const static int tagTbl=666;
-CollectionViewController *cvc;
-TakeMySelf* myself;
+TakeMySelf*  myself;
 @implementation ViewControllerSecond
 
 - (void)viewDidLoad {
-    
     self.title=@"Friends";
     [self.wAPI getUsers];
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -32,7 +30,6 @@ TakeMySelf* myself;
     tableView.tag=tagTbl;
     tableView.delegate=self;
     tableView.dataSource=self;
-    
 }
 - (void)downloadUsersComplete{
     arrUsers=[self.wAPI parserUser];
@@ -64,8 +61,10 @@ TakeMySelf* myself;
     ViewControllerThred *vc;
     vc=[self.storyboard instantiateViewControllerWithIdentifier:@"ViewControllerThred"];
     vc.userTmp=[arrUsers objectAtIndex:indexPath.row];
+    vc.my=myself;
     [self.navigationController pushViewController:vc animated:YES];
-    /*cvc=[self.storyboard instantiateViewControllerWithIdentifier:@"CollectionViewController"];
+    /*CollectionViewController *cvc;
+    cvc=[self.storyboard instantiateViewControllerWithIdentifier:@"CollectionViewController"];
     cvc.userI=[arrUsers objectAtIndex:indexPath.row ];
     [self.navigationController pushViewController:cvc animated:YES];*/
     

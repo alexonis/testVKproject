@@ -7,10 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+@interface Messages : NSObject
+{
 
-@interface MyStrig : NSObject
+}
 @property NSString* mainString;
 @property NSString* outString;
 @property NSString* idString;
+@property NSMutableArray* attachImgURL;
+@property NSMutableArray* arrayOfImages;
+-(void)TakeAttachementImg;
 
 @end

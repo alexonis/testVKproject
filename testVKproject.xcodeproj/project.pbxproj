@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		920FA42E1C4160E5009C9DE2 /* MyCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 920FA42D1C4160E5009C9DE2 /* MyCustomCell.m */; };
 		922840831C3323410054BE13 /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 922840821C3323410054BE13 /* CollectionViewController.m */; };
 		924777BE1BFE78810077D501 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 924777BD1BFE78810077D501 /* main.m */; };
 		924777C11BFE78810077D501 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 924777C01BFE78810077D501 /* AppDelegate.m */; };
@@ -19,7 +20,7 @@
 		924777F11BFE83280077D501 /* ViewControllerSecond.m in Sources */ = {isa = PBXBuildFile; fileRef = 924777F01BFE83280077D501 /* ViewControllerSecond.m */; };
 		925ABA381C3A8ED400875325 /* ViewControllerThred.m in Sources */ = {isa = PBXBuildFile; fileRef = 925ABA371C3A8ED400875325 /* ViewControllerThred.m */; };
 		9271B7141C15D3E000B48C3D /* notavatar.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9271B7131C15D3E000B48C3D /* notavatar.jpeg */; };
-		92962BB21C3DC981003761CB /* MyStrig.m in Sources */ = {isa = PBXBuildFile; fileRef = 92962BB11C3DC981003761CB /* MyStrig.m */; };
+		92962BB21C3DC981003761CB /* Messages.m in Sources */ = {isa = PBXBuildFile; fileRef = 92962BB11C3DC981003761CB /* Messages.m */; };
 		92962BB51C3DCC97003761CB /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 92962BB41C3DCC97003761CB /* CollectionViewCell.m */; };
 		92962BB91C3DCEA4003761CB /* TakeMySelf.m in Sources */ = {isa = PBXBuildFile; fileRef = 92962BB81C3DCEA4003761CB /* TakeMySelf.m */; };
 		92C350DF1C0F109E004F4CA6 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 92C350DE1C0F109E004F4CA6 /* User.m */; };
@@ -44,6 +45,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		920FA42C1C4160E5009C9DE2 /* MyCustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCustomCell.h; sourceTree = "<group>"; };
+		920FA42D1C4160E5009C9DE2 /* MyCustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCustomCell.m; sourceTree = "<group>"; };
 		922840811C3323410054BE13 /* CollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewController.h; sourceTree = "<group>"; };
 		922840821C3323410054BE13 /* CollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewController.m; sourceTree = "<group>"; };
 		924777B91BFE78810077D501 /* testVKproject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testVKproject.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,8 +70,8 @@
 		925ABA361C3A8ED400875325 /* ViewControllerThred.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerThred.h; sourceTree = "<group>"; };
 		925ABA371C3A8ED400875325 /* ViewControllerThred.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerThred.m; sourceTree = "<group>"; };
 		9271B7131C15D3E000B48C3D /* notavatar.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = notavatar.jpeg; path = ../../../Downloads/testVKproject/testVKproject/notavatar.jpeg; sourceTree = "<group>"; };
-		92962BB01C3DC981003761CB /* MyStrig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyStrig.h; sourceTree = "<group>"; };
-		92962BB11C3DC981003761CB /* MyStrig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyStrig.m; sourceTree = "<group>"; };
+		92962BB01C3DC981003761CB /* Messages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Messages.h; sourceTree = "<group>"; };
+		92962BB11C3DC981003761CB /* Messages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Messages.m; sourceTree = "<group>"; };
 		92962BB31C3DCC97003761CB /* CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewCell.h; sourceTree = "<group>"; };
 		92962BB41C3DCC97003761CB /* CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewCell.m; sourceTree = "<group>"; };
 		92962BB71C3DCEA4003761CB /* TakeMySelf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TakeMySelf.h; sourceTree = "<group>"; };
@@ -171,8 +174,8 @@
 		92962BB61C3DCD62003761CB /* OtherClasses */ = {
 			isa = PBXGroup;
 			children = (
-				92962BB11C3DC981003761CB /* MyStrig.m */,
-				92962BB01C3DC981003761CB /* MyStrig.h */,
+				92962BB11C3DC981003761CB /* Messages.m */,
+				92962BB01C3DC981003761CB /* Messages.h */,
 			);
 			name = OtherClasses;
 			sourceTree = "<group>";
@@ -199,6 +202,8 @@
 				924777F01BFE83280077D501 /* ViewControllerSecond.m */,
 				925ABA361C3A8ED400875325 /* ViewControllerThred.h */,
 				925ABA371C3A8ED400875325 /* ViewControllerThred.m */,
+				920FA42C1C4160E5009C9DE2 /* MyCustomCell.h */,
+				920FA42D1C4160E5009C9DE2 /* MyCustomCell.m */,
 				922840811C3323410054BE13 /* CollectionViewController.h */,
 				922840821C3323410054BE13 /* CollectionViewController.m */,
 				92962BB31C3DCC97003761CB /* CollectionViewCell.h */,
@@ -342,8 +347,9 @@
 				925ABA381C3A8ED400875325 /* ViewControllerThred.m in Sources */,
 				92C350DF1C0F109E004F4CA6 /* User.m in Sources */,
 				922840831C3323410054BE13 /* CollectionViewController.m in Sources */,
-				92962BB21C3DC981003761CB /* MyStrig.m in Sources */,
+				92962BB21C3DC981003761CB /* Messages.m in Sources */,
 				924777F11BFE83280077D501 /* ViewControllerSecond.m in Sources */,
+				920FA42E1C4160E5009C9DE2 /* MyCustomCell.m in Sources */,
 				924777C41BFE78810077D501 /* ViewController.m in Sources */,
 				92962BB51C3DCC97003761CB /* CollectionViewCell.m in Sources */,
 				924777C11BFE78810077D501 /* AppDelegate.m in Sources */,

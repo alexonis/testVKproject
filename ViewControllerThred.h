@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "User.h"
-
+#import "TakeMySelf.h"
 @interface ViewControllerThred : UIViewController<UITableViewDataSource,UITableViewDelegate>
 {
     UITableView *tableView;
@@ -19,6 +19,7 @@
     NSMutableArray *historyMessage;
 }
 @property User *userTmp;
+@property TakeMySelf *my;
 -(void) btnSend;
 -(void) downloadMsg;
 -(void) requestMesg;

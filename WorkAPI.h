@@ -21,11 +21,9 @@
 @property NSString* user_Id;
 @property User* usertmp;
 @property UIImage* myPhoto;
--(User*) parserMyself;
 -(NSMutableArray*) parserUser;
 -(NSMutableArray*) parserImages;
 -(NSMutableArray*) parserMessag;
--(void)getMySelf;
 -(void)getMessag;
 -(void)getUsers;
 -(void)getImages:(int) imgNext;
