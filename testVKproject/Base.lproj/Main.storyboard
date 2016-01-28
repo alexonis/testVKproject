@@ -38,7 +38,7 @@
                                     <rect key="frame" x="154" y="635" width="92" height="30"/>
                                 </variation>
                                 <connections>
-                                    <action selector="GetFriends:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7dy-Eg-ppt"/>
+                                    <action selector="getFriends:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DTR-KF-40p"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -89,23 +89,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="Yfh-Tk-H9q">
-                            <size key="itemSize" width="125" height="125"/>
+                            <size key="itemSize" width="196" height="183"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="CollectionViewCell" reuseIdentifier="Cell" id="Bfu-Ls-UJX" customClass="CollectionViewCell">
-                                <rect key="frame" x="0.0" y="0.0" width="125" height="125"/>
+                                <rect key="frame" x="0.0" y="0.0" width="196" height="183"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="125" height="125"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="196" height="183"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Emt-vt-oSK">
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                             <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                                <rect key="frame" x="1" y="10" width="122" height="106"/>
+                                                <rect key="frame" x="5" y="12" width="187" height="160"/>
                                             </variation>
                                         </imageView>
                                     </subviews>

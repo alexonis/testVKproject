@@ -33,7 +33,6 @@ NSMutableData*  Vk;
 }
 -(void) takeMyname
 {
-    //NSDictionary *my=jsonMY[@"response"][0];
     self.firstName= [NSString stringWithFormat:@"%@",jsonMY[@"response"][0][@"first_name"]];
     self.lastName= [NSString stringWithFormat:@"%@",jsonMY[@"response"][0][@"last_name"]];
         NSLog(@"%@ %@",self.firstName,self.lastName);
@@ -67,8 +66,6 @@ NSMutableData*  Vk;
                             JSONObjectWithData:Vk
                             options:kNilOptions
                             error:&error];
-    
-    //NSLog(@"%@ !",[[NSString alloc] initWithData:Vk encoding:NSUTF8StringEncoding]);
     [self takeMyname];
     [self takeMyImg];
 }

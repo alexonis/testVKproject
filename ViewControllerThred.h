@@ -10,17 +10,9 @@
 #import "User.h"
 #import "TakeMySelf.h"
 @interface ViewControllerThred : UIViewController<UITableViewDataSource,UITableViewDelegate>
-{
-    UITableView *tableView;
-    UITextField *textMsg;
-    UIButton *sendBtn;
-    UIImage *myPhoto;
-    UIImage *interPhoto;
-    NSMutableArray *historyMessage;
-}
 @property User *userTmp;
-@property TakeMySelf *my;
--(void) btnSend;
--(void) downloadMsg;
--(void) requestMesg;
+@property TakeMySelf *mySelf;
+-(void) buttonSendMessage;
+-(void) downloadMessage;
+-(void) requestMessage;
 @end

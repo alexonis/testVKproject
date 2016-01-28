@@ -27,12 +27,12 @@ WorkAPI *work;
 {
     work=[WorkAPI alloc];
     work.usertmp=self;
-    [work getMessag];
+    [work getMessage];
 
 }
 -(void)avaDownload
 {
-    NSURL *urlIM=[NSURL URLWithString:self.imgUrl];
+    NSURL *urlIM=[NSURL URLWithString:self.imageUrl];
     NSData *dataIm=[NSData dataWithContentsOfURL:urlIM];
     avaImg=[UIImage imageWithData:dataIm];
 }
@@ -42,11 +42,11 @@ WorkAPI *work;
     work.usertmp=self;
     [work getImages:imgNext];
 }
--(void)sendMsg:(NSString *)message
+-(void)sendMessage:(NSString *)message
 {
     work=[WorkAPI alloc];
     work.usertmp=self;
-    NSLog(@"%@",self.usId);
-    [work sendMsg:message andId:self.usId ];
+    NSLog(@"%@",self.userID);
+    [work sendMessage:message andID:self.userID];
 }
 @end

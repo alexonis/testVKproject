@@ -12,8 +12,11 @@
 Boolean *friensorphoto;
 @implementation WorkAPI
 int whatIdo=0;
-
--(void)sendMsg:(NSString *)message andId: (NSString*) idUser
+NSMutableData* dataVK;
+NSArray* arrayUserJson;
+NSArray* arrayMessageHistory;
+NSMutableArray* arrayUsersJsonImgUrls;
+-(void)sendMessage:(NSString *)message andID: (NSString*) idUser
 {
    
     whatIdo=0;
@@ -51,20 +54,20 @@ int whatIdo=0;
     dataVK = [NSMutableData data];
     NSString *urlS=[NSString stringWithFormat:
                     @"https://api.vk.com/method/photos.getAll?owner_id=%@&offset=%i&access_token=%@",
-                    self.usertmp.usId,imgNext,[userDefaults objectForKey:@"token"]];
+                    self.usertmp.userID,imgNext,[userDefaults objectForKey:@"token"]];
     NSURL *url=[NSURL URLWithString:urlS];
     NSURLRequest *request =[NSURLRequest requestWithURL:url];
     NSURLConnection *theConnect=[[NSURLConnection alloc]
                                  initWithRequest:request delegate:self];
     [theConnect start];
 }
--(void) getMessag
+-(void) getMessage
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     whatIdo=3;
     dataVK = [NSMutableData data];
     NSString *urlS=[NSString stringWithFormat:
-                    @"https://api.vk.com/method/messages.getHistory?user_id=%@&count=50&v=5.40&access_token=%@",self.usertmp.usId,[userDefaults objectForKey:@"token"]];
+                    @"https://api.vk.com/method/messages.getHistory?user_id=%@&v=5.40&access_token=%@",self.usertmp.userID,[userDefaults objectForKey:@"token"]];
     NSURL *url=[NSURL URLWithString:urlS];
     NSURLRequest *request =[NSURLRequest requestWithURL:url];
     NSURLConnection *theConnect=[[NSURLConnection alloc]
@@ -75,23 +78,23 @@ int whatIdo=0;
 
 -(NSMutableArray*) parserUser
 {
-    NSMutableArray *arFin=[NSMutableArray arrayWithCapacity:[arrUserJson count]];
-    for( NSDictionary *friend in arrUserJson)
+    NSMutableArray *arFin=[NSMutableArray arrayWithCapacity:[arrayUserJson count]];
+    for( NSDictionary *friend in arrayUserJson)
     {
         User *user=[[User alloc] init];
         user.fullName = [NSString stringWithFormat:@"%@ %@",
                          friend[@"first_name"],
                          friend[@"last_name"]];
-        user.imgUrl = friend[@"photo_50"];
-        user.usId = friend[@"id"];
+        user.imageUrl = friend[@"photo_50"];
+        user.userID = friend[@"id"];
         [arFin addObject:user];
     }
     return arFin;
 }
--(NSMutableArray*) parserMessag
+-(NSMutableArray*) parserMessage
 {
-    NSMutableArray *arFin=[NSMutableArray arrayWithCapacity:[arrMsg count]];
-    for( NSDictionary *messag in arrMsg)
+    NSMutableArray *arFin=[NSMutableArray arrayWithCapacity:[arrayMessageHistory count]];
+    for( NSDictionary *messag in arrayMessageHistory)
     {
         Messages* mStr=[Messages alloc];
         mStr.mainString = [NSString stringWithFormat:@"%@",messag[@"body"]];
@@ -114,9 +117,9 @@ int whatIdo=0;
 }
 -(NSMutableArray*) parserImages
 {
-    NSMutableArray *arphotos=[NSMutableArray arrayWithCapacity:[arrUserJsonImg count]];
-    self.usertmp.colvoImg=(int) [arrUserJsonImg[0] integerValue];
-    for( NSDictionary *photo in arrUserJsonImg)
+    NSMutableArray *arphotos=[NSMutableArray arrayWithCapacity:[arrayUsersJsonImgUrls count]];
+    self.usertmp.valueImages=(int) [arrayUsersJsonImgUrls[0] integerValue];
+    for( NSDictionary *photo in arrayUsersJsonImgUrls)
     {
         NSString *strImgUrl=[[NSString alloc] init];
         @try {
@@ -163,7 +166,7 @@ int whatIdo=0;
                                   JSONObjectWithData:dataVK
                                   options:kNilOptions
                                   error:&error];
-             arrUserJson=json[@"response"][@"items"];
+             arrayUserJson=json[@"response"][@"items"];
              [[NSNotificationCenter defaultCenter] postNotificationName:@"GetUserComlete" object:nil];
         }
             break;
@@ -174,22 +177,21 @@ int whatIdo=0;
                                   JSONObjectWithData:dataVK
                                   options:kNilOptions
                                   error:&error];
-            arrUserJsonImg =json[@"response"] ;
-            self.usertmp.imgsUsr_url =[self parserImages];
+            arrayUsersJsonImgUrls =json[@"response"] ;
+            self.usertmp.imagesUser_urls =[self parserImages];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"GetImagesComplete" object:nil];
             
         }
             break;
         case 3:
         {
-            NSLog(@"%@",@"ALOHADANCE");
             NSError *error;
             NSDictionary *json = [NSJSONSerialization
                                   JSONObjectWithData:dataVK
                                   options:kNilOptions
                                   error:&error];
-            arrMsg =json[@"response"][@"items"] ;
-             self.usertmp.msgHist=[self parserMessag];
+            arrayMessageHistory =json[@"response"][@"items"] ;
+            self.usertmp.messageHistory=[self parserMessage];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"GetHistoryComplete" object:nil];
            // NSLog(@"%@",[[NSString alloc] initWithData:dataVK encoding:NSUTF8StringEncoding]);
         }

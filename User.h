@@ -13,17 +13,17 @@
 {
 @public   UIImage *avaImg;
 }
-@property int colvoImg;
-@property NSArray *imgsUsr_url;
-@property NSArray *msgHist;
-@property NSArray *imageUser;
+@property int valueImages;
+@property NSArray *imagesUser_urls;
+@property NSArray *messageHistory;
+@property NSArray *imagesUser;
 @property NSString *fullName;
-@property NSString *imgUrl;
-@property NSString *usId;
+@property NSString *imageUrl;
+@property NSString *userID;
 -(UIImage*)imgDownload:(NSString*)imgsUr;
 -(NSString*) getName;
 -(void) getMessage;
--(void)sendMsg:(NSString*) message;
+-(void)sendMessage:(NSString*) message;
 -(void)avaDownload;
 -(void)getUserImages:(int) imgNext;
 

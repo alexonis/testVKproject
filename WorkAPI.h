@@ -11,22 +11,16 @@
 #import "User.h"
 
 @interface WorkAPI : NSObject<NSURLConnectionDelegate>
-{
-    NSMutableData* dataVK;
-    NSArray* arrUserJson;
-    NSArray* arrMsg;
-    NSMutableArray* arrUserJsonImg;
-@public User* myself;
-}
 @property NSString* user_Id;
 @property User* usertmp;
 @property UIImage* myPhoto;
 -(NSMutableArray*) parserUser;
 -(NSMutableArray*) parserImages;
--(NSMutableArray*) parserMessag;
--(void)getMessag;
+-(NSMutableArray*) parserMessage;
+-(void)connectToLongPong;
+-(void)getMessage;
 -(void)getUsers;
 -(void)getImages:(int) imgNext;
--(void)sendMsg:(NSString*)message andId:(NSString*)idUser;
+-(void)sendMessage:(NSString*)message andID:(NSString*)idUser;
 @end
 

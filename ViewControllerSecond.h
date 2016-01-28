@@ -11,10 +11,6 @@
 #import "User.h"
 
 @interface ViewControllerSecond : UIViewController <UITableViewDataSource, UITableViewDelegate>
-{
-    UITableView *tableView;
-    NSArray *arrUsers;
-}
 -(void)downloadUsersComplete;
 @property WorkAPI *wAPI;
 @end

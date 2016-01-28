@@ -19,7 +19,7 @@
 		924777E21BFE78810077D501 /* testVKprojectUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 924777E11BFE78810077D501 /* testVKprojectUITests.m */; };
 		924777F11BFE83280077D501 /* ViewControllerSecond.m in Sources */ = {isa = PBXBuildFile; fileRef = 924777F01BFE83280077D501 /* ViewControllerSecond.m */; };
 		925ABA381C3A8ED400875325 /* ViewControllerThred.m in Sources */ = {isa = PBXBuildFile; fileRef = 925ABA371C3A8ED400875325 /* ViewControllerThred.m */; };
-		9271B7141C15D3E000B48C3D /* notavatar.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9271B7131C15D3E000B48C3D /* notavatar.jpeg */; };
+		926D6F031C58B89900FFA092 /* notavatar.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 926D6F021C58B89900FFA092 /* notavatar.jpeg */; };
 		92962BB21C3DC981003761CB /* Messages.m in Sources */ = {isa = PBXBuildFile; fileRef = 92962BB11C3DC981003761CB /* Messages.m */; };
 		92962BB51C3DCC97003761CB /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 92962BB41C3DCC97003761CB /* CollectionViewCell.m */; };
 		92962BB91C3DCEA4003761CB /* TakeMySelf.m in Sources */ = {isa = PBXBuildFile; fileRef = 92962BB81C3DCEA4003761CB /* TakeMySelf.m */; };
@@ -69,7 +69,7 @@
 		924777F01BFE83280077D501 /* ViewControllerSecond.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerSecond.m; sourceTree = "<group>"; };
 		925ABA361C3A8ED400875325 /* ViewControllerThred.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerThred.h; sourceTree = "<group>"; };
 		925ABA371C3A8ED400875325 /* ViewControllerThred.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerThred.m; sourceTree = "<group>"; };
-		9271B7131C15D3E000B48C3D /* notavatar.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = notavatar.jpeg; path = ../../../Downloads/testVKproject/testVKproject/notavatar.jpeg; sourceTree = "<group>"; };
+		926D6F021C58B89900FFA092 /* notavatar.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = notavatar.jpeg; sourceTree = "<group>"; };
 		92962BB01C3DC981003761CB /* Messages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Messages.h; sourceTree = "<group>"; };
 		92962BB11C3DC981003761CB /* Messages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Messages.m; sourceTree = "<group>"; };
 		92962BB31C3DCC97003761CB /* CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewCell.h; sourceTree = "<group>"; };
@@ -110,6 +110,7 @@
 		924777B01BFE78810077D501 = {
 			isa = PBXGroup;
 			children = (
+				926D6F021C58B89900FFA092 /* notavatar.jpeg */,
 				92962BB61C3DCD62003761CB /* OtherClasses */,
 				92AAA8BC1C1606E200DA9545 /* Controlls */,
 				92AAA8BB1C1606B100DA9545 /* API */,
@@ -135,7 +136,6 @@
 			children = (
 				924777BF1BFE78810077D501 /* AppDelegate.h */,
 				924777C01BFE78810077D501 /* AppDelegate.m */,
-				9271B7131C15D3E000B48C3D /* notavatar.jpeg */,
 				924777C51BFE78810077D501 /* Main.storyboard */,
 				924777C81BFE78810077D501 /* Assets.xcassets */,
 				924777CA1BFE78810077D501 /* LaunchScreen.storyboard */,
@@ -174,8 +174,8 @@
 		92962BB61C3DCD62003761CB /* OtherClasses */ = {
 			isa = PBXGroup;
 			children = (
-				92962BB11C3DC981003761CB /* Messages.m */,
 				92962BB01C3DC981003761CB /* Messages.h */,
+				92962BB11C3DC981003761CB /* Messages.m */,
 			);
 			name = OtherClasses;
 			sourceTree = "<group>";
@@ -317,7 +317,7 @@
 			files = (
 				924777CC1BFE78810077D501 /* LaunchScreen.storyboard in Resources */,
 				924777C91BFE78810077D501 /* Assets.xcassets in Resources */,
-				9271B7141C15D3E000B48C3D /* notavatar.jpeg in Resources */,
+				926D6F031C58B89900FFA092 /* notavatar.jpeg in Resources */,
 				924777C71BFE78810077D501 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

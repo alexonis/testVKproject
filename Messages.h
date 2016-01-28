@@ -9,9 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 @interface Messages : NSObject
-{
-
-}
 @property NSString* mainString;
 @property NSString* outString;
 @property NSString* idString;

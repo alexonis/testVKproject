@@ -10,10 +10,7 @@
 #import "User.h"
 
 @interface CollectionViewController : UICollectionViewController
-{
-    NSMutableArray *imgs;
-    
-}
+
 @property User *userI;
 @property UIImage *imgsUs;
 -(void) downloadImgComplete;

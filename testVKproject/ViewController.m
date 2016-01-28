@@ -15,7 +15,9 @@
 
 @end
 const NSInteger tagWebView=1024;
-
+NSString* access_token;
+NSString* user_Id;
+UIWebView* webView;
 @implementation ViewController
 WorkAPI *wAPI;
 NSUserDefaults *userDefaults;
@@ -54,7 +56,7 @@ NSUserDefaults *userDefaults;
     [webView loadRequest:requestObj];
 }
 
--(IBAction)GetFriends:(id) sender
+-(IBAction)getFriends:(id) sender
 {
     ViewControllerSecond *vc;
     vc=[self.storyboard instantiateViewControllerWithIdentifier:@"ViewControllerSecond"];

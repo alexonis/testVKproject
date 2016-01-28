@@ -9,11 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ViewController : UIViewController<UIWebViewDelegate>
-{
-    NSString* access_token;
-    NSString* user_Id;
-    UIWebView* webView;
-}
 -(IBAction)connectVK:(id)sender;
--(IBAction)GetFriends:(id)sender;
+-(IBAction)getFriends:(id)sender;
 @end

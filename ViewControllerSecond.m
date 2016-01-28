@@ -16,6 +16,8 @@
 const static int tagTbl=666;
 TakeMySelf*  myself;
 User* sendUser;
+UITableView *tableView;
+NSArray *arrUsers;
 @implementation ViewControllerSecond
 
 - (void)viewDidLoad {
@@ -83,7 +85,7 @@ User* sendUser;
         ViewControllerThred *vc;
         vc=[self.storyboard instantiateViewControllerWithIdentifier:@"ViewControllerThred"];
         vc.userTmp=sendUser;
-        vc.my=myself;
+        vc.mySelf=myself;
         [self.navigationController pushViewController:vc animated:YES];
     }
     else
@@ -115,6 +117,8 @@ User* sendUser;
         [arrUsers[indexPath.row] avaDownload];
         dispatch_async(dispatch_get_main_queue(), ^{ //Показываем фотографию в основном потоке
             cell.imageView.image=user->avaImg;
+            cell.imageView.clipsToBounds=YES;
+            cell.imageView.layer.cornerRadius=cell.imageView.frame.size.width/2;
         });
     });
     return cell;

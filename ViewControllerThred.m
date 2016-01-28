@@ -11,22 +11,27 @@
 #import "Messages.h"
 #import "MyCustomCell.h"
 @interface ViewControllerThred ()
-
 @end
 const int tagTbl=333;
 const int tagTxf=666;
 const int tagBtn=999;
+UITableView *tableView;
+UITextField *textMsg;
+UIButton *sendBtn;
+UIImage *myPhoto;
+UIImage *interPhoto;
+NSMutableArray *historyMessage;
 
 @implementation ViewControllerThred
 
--(void) requestMesg
+-(void) requestMessage
 {
     [self.userTmp getMessage];
 }
--(void) downloadMsg
+-(void) downloadMessage
 {
     [historyMessage removeAllObjects];
-    [historyMessage addObjectsFromArray:self.userTmp.msgHist];
+    [historyMessage addObjectsFromArray:self.userTmp.messageHistory];
     [tableView reloadData];
     CGPoint bottomOffset = CGPointMake(0, tableView.contentSize.height - tableView.bounds.size.height);
     [tableView setContentOffset:bottomOffset animated:NO];
@@ -34,11 +39,11 @@ const int tagBtn=999;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(downloadMsg)
+                                             selector:@selector(downloadMessage)
                                                  name:@"GetHistoryComplete"
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(requestMesg)
+                                             selector:@selector(requestMessage)
                                                  name:@"SendComplete"
                                                object:nil];
     historyMessage=[[NSMutableArray alloc] init];
@@ -58,10 +63,10 @@ const int tagBtn=999;
     [sendBtn setTitle:@"Send Message" forState:UIControlStateNormal];
     [sendBtn sizeToFit];
     sendBtn.center = CGPointMake(350,tableView.frame.size.height+20);
-    [sendBtn addTarget:self action:@selector(btnSend) forControlEvents:UIControlEventTouchUpInside];
+    [sendBtn addTarget:self action:@selector(buttonSendMessage) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:sendBtn];
     interPhoto=self.userTmp->avaImg;
-    myPhoto=self.my->myImage;
+    myPhoto=self.mySelf->myImage;
 }
 
 - (void)dealloc {
@@ -74,16 +79,15 @@ const int tagBtn=999;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void) btnSend
+-(void) buttonSendMessage
 {
 
     NSCharacterSet* charetSet=[NSCharacterSet characterSetWithCharactersInString:@" "];
     NSString* resultStr= (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)textMsg.text,NULL,NULL,kCFStringEncodingUTF8));
     resultStr=[[resultStr componentsSeparatedByCharactersInSet:charetSet]
                        componentsJoinedByString:@"+"];
-    [self.userTmp sendMsg:resultStr];
+    [self.userTmp sendMessage:resultStr];
     textMsg.text=nil;
-    
 }
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -113,13 +117,10 @@ const int tagBtn=999;
               reuseIdentifier:cellIdentifier];
     }
     [cell createCell:strTmp];
-    //cell.labelMessage.text=strTmp.mainString;
-    //cell.labelMessage.numberOfLines=0;
-    //[cell.labelMessage sizeToFit];
     cell.textLabel.text =strTmp.mainString;
     cell.textLabel.numberOfLines=0;
     [cell.textLabel sizeToFit];
-   // cell.textLabel.backgroundColor=[UIColor blueColor];
+    [cell createCell:strTmp];
     if ([strTmp.outString isEqual:@"0"]) {
         
         cell.imageView.image=interPhoto;

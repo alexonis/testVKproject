@@ -13,18 +13,11 @@
 @end
 
 @implementation CollectionViewController
-
-
+bool isRefresh;
+NSMutableArray *imgs;
 static NSString * const reuseIdentifier = @"Cell";
--(void) downloadImgComplete
-{
-    [imgs addObjectsFromArray:self.userI.imgsUsr_url];
-    [self.collectionView reloadData];
-    if ([imgs count]==self.userI.colvoImg) {
-        [self.collectionView reloadData];
-    }
-}
 - (void)viewDidLoad {
+    isRefresh=false;
     [super viewDidLoad];
     self.title=self.userI.fullName;
     [self.userI getUserImages:0];
@@ -33,20 +26,17 @@ static NSString * const reuseIdentifier = @"Cell";
                                              selector:@selector(downloadImgComplete)
                                                  name:@"GetImagesComplete"
                                                object:nil];
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Register cell classes
-    //[self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
-    
-    // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void) downloadImgComplete
+{
+    [imgs addObjectsFromArray:self.userI.imagesUser_urls];
+    [self.collectionView reloadData];
+    if ([imgs count]==self.userI.valueImages) {
+        [self.collectionView reloadData];
+        isRefresh=false;
+    }
 }
-
 /*
 #pragma mark - Navigation
 
@@ -79,12 +69,12 @@ static NSString * const reuseIdentifier = @"Cell";
             cell.imgsUsr.image=img;
         });
     });
-    if ((indexPath.row==[imgs count]/2)&&(indexPath.row + 1<self.userI.colvoImg)&&([imgs count]!=self.userI.colvoImg)) {
+    //if ((indexPath.row==[imgs count]/2)&&(indexPath.row + 1<self.userI.colvoImg)&&([imgs count]!=self.userI.colvoImg)) {
        
-        [self.userI getUserImages:[imgs count]];
-    }
+      //  [self.userI getUserImages:[imgs count]];
+    //}
 
-     NSLog(@"%lu %i", (unsigned long)[imgs count], self.userI.colvoImg);
+     NSLog(@"%lu %i", (unsigned long)[imgs count], self.userI.valueImages);
     return cell;
 }
 
@@ -92,8 +82,20 @@ static NSString * const reuseIdentifier = @"Cell";
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-   // NSLog(@"%f",scrollView.contentOffset.y);
+     NSLog(@"%f  %f",scrollView.contentSize.width,scrollView.contentSize.height);
+    
+     if(scrollView.contentOffset.y >= (scrollView.contentSize.height - scrollView.bounds.size.height) && !isRefresh)
+     {
+         isRefresh=true;
+         [self.userI getUserImages:[imgs count]];
+         NSLog(@" !!!!!!!!");
+     }
 }
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 /*
 // Uncomment this method to specify if the specified item should be highlighted during tracking
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
