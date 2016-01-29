@@ -17,7 +17,6 @@
 -(NSMutableArray*) parserUser;
 -(NSMutableArray*) parserImages;
 -(NSMutableArray*) parserMessage;
--(void)connectToLongPong;
 -(void)getMessage;
 -(void)getUsers;
 -(void)getImages:(int) imgNext;

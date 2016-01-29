@@ -64,7 +64,7 @@ static NSString * const reuseIdentifier = @"Cell";
     // Configure the cell
     cell.imgsUsr.image=[UIImage imageNamed:@"notavatar.jpeg"];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{ // Загрузка в другом потоке
-        UIImage *img=[self.userI imgDownload:imgs[indexPath.row]];
+        UIImage *img=[self.userI imagesDownload:imgs[indexPath.row]];
         dispatch_async(dispatch_get_main_queue(), ^{ //Показываем фотографию в основном потоке
             cell.imgsUsr.image=img;
         });

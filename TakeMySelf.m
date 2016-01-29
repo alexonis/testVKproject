@@ -35,7 +35,6 @@ NSMutableData*  Vk;
 {
     self.firstName= [NSString stringWithFormat:@"%@",jsonMY[@"response"][0][@"first_name"]];
     self.lastName= [NSString stringWithFormat:@"%@",jsonMY[@"response"][0][@"last_name"]];
-        NSLog(@"%@ %@",self.firstName,self.lastName);
 }
 -(void)takeMyImg
 {
@@ -60,7 +59,6 @@ NSMutableData*  Vk;
 }
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    NSLog(@"!!!");
     NSError *error;
     jsonMY= [NSJSONSerialization
                             JSONObjectWithData:Vk

@@ -16,6 +16,85 @@ NSMutableData* dataVK;
 NSArray* arrayUserJson;
 NSArray* arrayMessageHistory;
 NSMutableArray* arrayUsersJsonImgUrls;
+#pragma Work with users
+-(void)getUsers
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    whatIdo=1;
+    dataVK = [NSMutableData data];
+    NSString *urlS=[NSString stringWithFormat:
+                    @"https://api.vk.com/method/friends.get?user_id=%@&fields=nickname,photo_50&v=5.40&access_token=%@",[userDefaults objectForKey:@"myId"],[userDefaults objectForKey:@"token"]];
+    NSURL *url=[NSURL URLWithString:urlS];
+    NSURLRequest *request =[NSURLRequest requestWithURL:url];
+    NSURLConnection *theConnect=[[NSURLConnection alloc]
+                                 initWithRequest:request
+                                 delegate:self];
+    [theConnect start];
+}
+-(NSMutableArray*) parserUser
+{
+    NSMutableArray *arFin=[NSMutableArray arrayWithCapacity:[arrayUserJson count]];
+    for( NSDictionary *friend in arrayUserJson)
+    {
+        User *user=[[User alloc] init];
+        user.fullName = [NSString stringWithFormat:@"%@ %@",
+                         friend[@"first_name"],
+                         friend[@"last_name"]];
+        user.imageUrl = friend[@"photo_50"];
+        user.userID = friend[@"id"];
+        [arFin addObject:user];
+    }
+    return arFin;
+}
+#pragma Work with images
+-(void)getImages:(int) imgNext{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    whatIdo=2;
+    dataVK = [NSMutableData data];
+    NSString *urlS=[NSString stringWithFormat:
+                    @"https://api.vk.com/method/photos.getAll?owner_id=%@&offset=%i&access_token=%@",
+                    self.usertmp.userID,imgNext,[userDefaults objectForKey:@"token"]];
+    NSURL *url=[NSURL URLWithString:urlS];
+    NSURLRequest *request =[NSURLRequest requestWithURL:url];
+    NSURLConnection *theConnect=[[NSURLConnection alloc]
+                                 initWithRequest:request delegate:self];
+    [theConnect start];
+}
+-(NSMutableArray*) parserImages
+{
+    NSMutableArray *arphotos=[NSMutableArray arrayWithCapacity:[arrayUsersJsonImgUrls count]];
+    self.usertmp.valueImages=(int) [arrayUsersJsonImgUrls[0] integerValue];
+    for( NSDictionary *photo in arrayUsersJsonImgUrls)
+    {
+        NSString *strImgUrl=[[NSString alloc] init];
+        @try {
+            
+            strImgUrl=[NSString stringWithFormat:@"%@",photo[@"src_big"]];
+        }
+        @catch (NSException *exception) {
+        }
+        if (![strImgUrl isEqual:@""]) {
+            [arphotos addObject:strImgUrl];
+        }
+        
+    }
+    return arphotos;
+}
+#pragma Work with messages
+-(void) getMessage
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    whatIdo=3;
+    dataVK = [NSMutableData data];
+    NSString *urlS=[NSString stringWithFormat:
+                    @"https://api.vk.com/method/messages.getHistory?user_id=%@&v=5.40&access_token=%@",self.usertmp.userID,[userDefaults objectForKey:@"token"]];
+    NSURL *url=[NSURL URLWithString:urlS];
+    NSURLRequest *request =[NSURLRequest requestWithURL:url];
+    NSURLConnection *theConnect=[[NSURLConnection alloc]
+                                 initWithRequest:request
+                                 delegate:self];
+    [theConnect start];
+}
 -(void)sendMessage:(NSString *)message andID: (NSString*) idUser
 {
    
@@ -33,78 +112,19 @@ NSMutableArray* arrayUsersJsonImgUrls;
     [theConnect start];
     
 }
--(void)getUsers
-
-{
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    whatIdo=1;
-    dataVK = [NSMutableData data];
-    NSString *urlS=[NSString stringWithFormat:
-                    @"https://api.vk.com/method/friends.get?user_id=%@&fields=nickname,photo_50&v=5.40&access_token=%@",[userDefaults objectForKey:@"myId"],[userDefaults objectForKey:@"token"]];
-    NSURL *url=[NSURL URLWithString:urlS];
-    NSURLRequest *request =[NSURLRequest requestWithURL:url];
-    NSURLConnection *theConnect=[[NSURLConnection alloc]
-                                 initWithRequest:request
-                                 delegate:self];
-    [theConnect start];
-}
--(void)getImages:(int) imgNext{
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    whatIdo=2;
-    dataVK = [NSMutableData data];
-    NSString *urlS=[NSString stringWithFormat:
-                    @"https://api.vk.com/method/photos.getAll?owner_id=%@&offset=%i&access_token=%@",
-                    self.usertmp.userID,imgNext,[userDefaults objectForKey:@"token"]];
-    NSURL *url=[NSURL URLWithString:urlS];
-    NSURLRequest *request =[NSURLRequest requestWithURL:url];
-    NSURLConnection *theConnect=[[NSURLConnection alloc]
-                                 initWithRequest:request delegate:self];
-    [theConnect start];
-}
--(void) getMessage
-{
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    whatIdo=3;
-    dataVK = [NSMutableData data];
-    NSString *urlS=[NSString stringWithFormat:
-                    @"https://api.vk.com/method/messages.getHistory?user_id=%@&v=5.40&access_token=%@",self.usertmp.userID,[userDefaults objectForKey:@"token"]];
-    NSURL *url=[NSURL URLWithString:urlS];
-    NSURLRequest *request =[NSURLRequest requestWithURL:url];
-    NSURLConnection *theConnect=[[NSURLConnection alloc]
-                                 initWithRequest:request
-                                 delegate:self];
-    [theConnect start];
-}
-
--(NSMutableArray*) parserUser
-{
-    NSMutableArray *arFin=[NSMutableArray arrayWithCapacity:[arrayUserJson count]];
-    for( NSDictionary *friend in arrayUserJson)
-    {
-        User *user=[[User alloc] init];
-        user.fullName = [NSString stringWithFormat:@"%@ %@",
-                         friend[@"first_name"],
-                         friend[@"last_name"]];
-        user.imageUrl = friend[@"photo_50"];
-        user.userID = friend[@"id"];
-        [arFin addObject:user];
-    }
-    return arFin;
-}
 -(NSMutableArray*) parserMessage
 {
     NSMutableArray *arFin=[NSMutableArray arrayWithCapacity:[arrayMessageHistory count]];
-    for( NSDictionary *messag in arrayMessageHistory)
+    for( NSDictionary *message in arrayMessageHistory)
     {
         Messages* mStr=[Messages alloc];
-        mStr.mainString = [NSString stringWithFormat:@"%@",messag[@"body"]];
-        mStr.idString = [NSString stringWithFormat:@"%@",messag[@"id"]];
-        mStr.outString = [NSString stringWithFormat:@"%@",messag[@"out"]];
-        if ([messag valueForKey:@"attachments"]!=nil) {
-            NSLog(@"! %lu", [[messag valueForKey:@"attachments"] count]);
-            if ([[[NSString alloc] initWithString:[messag[@"attachments"]valueForKey:@"type"][0]] isEqual: @"photo"]) {
-                mStr.attachImgURL=[NSMutableArray arrayWithCapacity:[[messag valueForKey:@"attachments"] count]];
-                for( NSDictionary *attachment in [messag valueForKey:@"attachments"])
+        mStr.mainString = [NSString stringWithFormat:@"%@",message[@"body"]];
+        mStr.idString = [NSString stringWithFormat:@"%@",message[@"id"]];
+        mStr.outString = [NSString stringWithFormat:@"%@",message[@"out"]];
+        if ([message valueForKey:@"attachments"]!=nil) {
+            if ([[[NSString alloc] initWithString:[message[@"attachments"]valueForKey:@"type"][0]] isEqual: @"photo"]) {
+                mStr.attachImgURL=[NSMutableArray arrayWithCapacity:[[message valueForKey:@"attachments"] count]];
+                for( NSDictionary *attachment in [message valueForKey:@"attachments"])
                 {
                     [mStr.attachImgURL addObject:[[NSString alloc] initWithString:attachment[@"photo"][@"photo_130"]]];
                 }
@@ -115,26 +135,7 @@ NSMutableArray* arrayUsersJsonImgUrls;
     }
     return arFin;
 }
--(NSMutableArray*) parserImages
-{
-    NSMutableArray *arphotos=[NSMutableArray arrayWithCapacity:[arrayUsersJsonImgUrls count]];
-    self.usertmp.valueImages=(int) [arrayUsersJsonImgUrls[0] integerValue];
-    for( NSDictionary *photo in arrayUsersJsonImgUrls)
-    {
-        NSString *strImgUrl=[[NSString alloc] init];
-        @try {
-            
-            strImgUrl=[NSString stringWithFormat:@"%@",photo[@"src_big"]];
-        }
-        @catch (NSException *exception) {
-        }
-        if (![strImgUrl isEqual:@""]) {
-             [arphotos addObject:strImgUrl];
-        }
-       
-    }
-    return arphotos;
-}
+#pragma Work connection
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
     [dataVK setLength:0];
@@ -201,6 +202,4 @@ NSMutableArray* arrayUsersJsonImgUrls;
     }
    
 }
-
-
 @end

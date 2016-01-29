@@ -10,11 +10,13 @@
 #import "CollectionViewController.h"
 #import "ViewControllerThred.h"
 #import "TakeMySelf.h"
-
+#import "LongPollServer.h"
 @interface ViewControllerSecond ()
 @end
 const static int tagTbl=666;
+
 TakeMySelf*  myself;
+LongPollServer* longPollServer;
 User* sendUser;
 UITableView *tableView;
 NSArray *arrUsers;
@@ -22,6 +24,8 @@ NSArray *arrUsers;
 
 - (void)viewDidLoad {
     self.title=@"Friends";
+    longPollServer=[LongPollServer alloc];
+    [longPollServer connectToLongPoll];
     [self.wAPI getUsers];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(downloadUsersComplete)
@@ -67,7 +71,6 @@ NSArray *arrUsers;
                                              cancelButtonTitle:@"Message"
                                              otherButtonTitles:@"Show Photos", nil];
     [theAlert show];
-    
     //ViewControllerThred *vc;
     //vc=[self.storyboard instantiateViewControllerWithIdentifier:@"ViewControllerThred"];
     //vc.userTmp=[arrUsers objectAtIndex:indexPath.row];
@@ -95,7 +98,6 @@ NSArray *arrUsers;
         cvc.userI=sendUser;
         [self.navigationController pushViewController:cvc animated:YES];
     }
-    NSLog(@"%@ ", [theAlert buttonTitleAtIndex:buttonIndex]);
 }
 
 -(UITableViewCell *) tableView:(UITableView *) tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
@@ -116,7 +118,7 @@ NSArray *arrUsers;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{ // Загрузка в другом потоке
         [arrUsers[indexPath.row] avaDownload];
         dispatch_async(dispatch_get_main_queue(), ^{ //Показываем фотографию в основном потоке
-            cell.imageView.image=user->avaImg;
+            cell.imageView.image=user->avaImage;
             cell.imageView.clipsToBounds=YES;
             cell.imageView.layer.cornerRadius=cell.imageView.frame.size.width/2;
         });

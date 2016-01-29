@@ -23,7 +23,6 @@ WorkAPI *wAPI;
 NSUserDefaults *userDefaults;
 - (void)viewDidLoad {
     [super viewDidLoad];
-     // TakeMySelf*  myself=[[TakeMySelf alloc] init];
     wAPI=[WorkAPI alloc];
     userDefaults = [NSUserDefaults standardUserDefaults];
     if(([userDefaults objectForKey:@"token"]!=nil)&&([userDefaults objectForKey:@"myId"]!=nil))

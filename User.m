@@ -13,9 +13,9 @@
 WorkAPI *work;
 @implementation User
 
--(UIImage*)imgDownload:(NSString*)imgsUr
+-(UIImage*)imagesDownload:(NSString*)imagesUrls
 {
-    NSURL *urlIM=[NSURL URLWithString:imgsUr];
+    NSURL *urlIM=[NSURL URLWithString:imagesUrls];
     NSData *dataIm=[NSData dataWithContentsOfURL:urlIM];
     return[UIImage imageWithData:dataIm];
 }
@@ -34,7 +34,7 @@ WorkAPI *work;
 {
     NSURL *urlIM=[NSURL URLWithString:self.imageUrl];
     NSData *dataIm=[NSData dataWithContentsOfURL:urlIM];
-    avaImg=[UIImage imageWithData:dataIm];
+    avaImage=[UIImage imageWithData:dataIm];
 }
 -(void)getUserImages:(int) imgNext
 {
@@ -46,7 +46,6 @@ WorkAPI *work;
 {
     work=[WorkAPI alloc];
     work.usertmp=self;
-    NSLog(@"%@",self.userID);
     [work sendMessage:message andID:self.userID];
 }
 @end

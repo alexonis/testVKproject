@@ -23,6 +23,7 @@
 		92962BB21C3DC981003761CB /* Messages.m in Sources */ = {isa = PBXBuildFile; fileRef = 92962BB11C3DC981003761CB /* Messages.m */; };
 		92962BB51C3DCC97003761CB /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 92962BB41C3DCC97003761CB /* CollectionViewCell.m */; };
 		92962BB91C3DCEA4003761CB /* TakeMySelf.m in Sources */ = {isa = PBXBuildFile; fileRef = 92962BB81C3DCEA4003761CB /* TakeMySelf.m */; };
+		929D68721C5A2CFC00AA56A7 /* LongPollServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 929D68711C5A2CFC00AA56A7 /* LongPollServer.m */; };
 		92C350DF1C0F109E004F4CA6 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 92C350DE1C0F109E004F4CA6 /* User.m */; };
 		92C350E21C0F15E2004F4CA6 /* WorkAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 92C350E11C0F15E2004F4CA6 /* WorkAPI.m */; };
 /* End PBXBuildFile section */
@@ -76,6 +77,8 @@
 		92962BB41C3DCC97003761CB /* CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewCell.m; sourceTree = "<group>"; };
 		92962BB71C3DCEA4003761CB /* TakeMySelf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TakeMySelf.h; sourceTree = "<group>"; };
 		92962BB81C3DCEA4003761CB /* TakeMySelf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TakeMySelf.m; sourceTree = "<group>"; };
+		929D68701C5A2CFC00AA56A7 /* LongPollServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LongPollServer.h; sourceTree = "<group>"; };
+		929D68711C5A2CFC00AA56A7 /* LongPollServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LongPollServer.m; sourceTree = "<group>"; };
 		92C350DD1C0F109E004F4CA6 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		92C350DE1C0F109E004F4CA6 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		92C350E01C0F15E2004F4CA6 /* WorkAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkAPI.h; sourceTree = "<group>"; };
@@ -183,10 +186,12 @@
 		92AAA8BB1C1606B100DA9545 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				92C350DD1C0F109E004F4CA6 /* User.h */,
-				92C350DE1C0F109E004F4CA6 /* User.m */,
 				92C350E01C0F15E2004F4CA6 /* WorkAPI.h */,
 				92C350E11C0F15E2004F4CA6 /* WorkAPI.m */,
+				929D68701C5A2CFC00AA56A7 /* LongPollServer.h */,
+				929D68711C5A2CFC00AA56A7 /* LongPollServer.m */,
+				92C350DD1C0F109E004F4CA6 /* User.h */,
+				92C350DE1C0F109E004F4CA6 /* User.m */,
 				92962BB71C3DCEA4003761CB /* TakeMySelf.h */,
 				92962BB81C3DCEA4003761CB /* TakeMySelf.m */,
 			);
@@ -355,6 +360,7 @@
 				924777C11BFE78810077D501 /* AppDelegate.m in Sources */,
 				924777BE1BFE78810077D501 /* main.m in Sources */,
 				92C350E21C0F15E2004F4CA6 /* WorkAPI.m in Sources */,
+				929D68721C5A2CFC00AA56A7 /* LongPollServer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
