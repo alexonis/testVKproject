@@ -23,6 +23,7 @@ WorkAPI *wAPI;
 NSUserDefaults *userDefaults;
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"backgroundimg.jpg"]];
     wAPI=[WorkAPI alloc];
     userDefaults = [NSUserDefaults standardUserDefaults];
     if(([userDefaults objectForKey:@"token"]!=nil)&&([userDefaults objectForKey:@"myId"]!=nil))

@@ -4,22 +4,32 @@
 //
 //  Created by Alexonis on 28.01.16.
 //  Copyright © 2016 Alexonis. All rights reserved.
-//
+//   [[NSNotificationCenter defaultCenter] postNotificationName:@"GetImagesComplete" object:nil];
 
 #import "LongPollServer.h"
+#import "Messages.h"
 NSArray *arrayUpdates;
 NSMutableData* dataVK;
-NSString *longPollServer;
+NSString *longPoll;
 NSString *longPollKey;
 NSString *longPollts;
 NSDictionary *json;
 NSArray *arraytmp;
+NSString *userIDListen;
+Messages *message;
+bool listener;
 bool listening;
 @implementation LongPollServer
--(LongPollServer*) init
++(LongPollServer *) singleton
 {
-    //[self connectToLongPoll];
-    return self;
+    static LongPollServer *longPollServerObject = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        longPollServerObject  = [[self alloc] init];
+        [longPollServerObject connectToLongPoll];
+        NSLog(@"11");
+    });
+    return longPollServerObject;
 }
 -(void) connectToLongPoll
 {
@@ -34,12 +44,21 @@ bool listening;
                                  initWithRequest:request delegate:self];
     [theConnect start];
 }
+-(void)whoListening: (NSString*) userID
+{
+    userIDListen=userID;
+    listener=true;
+}
+-(void)unListen{
+    listener=false;
+}
 -(void)listeningLongPollServer
 {
     listening=1;
     NSString *urlS=[NSString stringWithFormat:
                     @"http://%@?act=a_check&key=%@&ts=%@&wait=25&mode=2",
-                    longPollServer,longPollKey,longPollts];
+                    longPoll,longPollKey,longPollts];
+        NSLog(@"%@ %@ %@ ",longPoll,longPollKey,longPollts);
     NSURL *url=[NSURL URLWithString:urlS];
     NSURLRequest *request =[NSURLRequest requestWithURL:url];
     NSURLConnection *theConnect=[[NSURLConnection alloc]
@@ -53,7 +72,21 @@ bool listening;
         arraytmp=arrayUpdates[0];
         switch ([arraytmp[0] integerValue]) {
             case 4:
-                NSLog(@"%@",arraytmp[3]);
+            {
+                message=[Messages alloc];
+                message.mainString=arraytmp[6];
+                if (([arraytmp[2] integerValue]==35)||([arraytmp[2] integerValue]==51)) {
+                    message.outString=@"1";
+                }
+                else
+                {
+                    message.outString=@"0";
+                }
+                if (arraytmp[3]==userIDListen) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"NewMessage" object:nil];
+                }
+                NSLog(@"%@ %@  %@",arraytmp[6],arraytmp[3], userIDListen);
+            }
                 break;
                 
             default:
@@ -62,6 +95,10 @@ bool listening;
     }
     longPollts=json[@"ts"];
     [self listeningLongPollServer];
+}
+-(Messages*)giveMessage{
+    NSLog(@"%@", message.mainString);
+    return message;
 }
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
@@ -75,7 +112,7 @@ bool listening;
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    NSLog(@"Connection failed: %@", [error description]);
+    NSLog(@"Connection failed: %@  LongPollServer! %@", [error description], connection.currentRequest.URL);
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
@@ -86,9 +123,9 @@ bool listening;
                               JSONObjectWithData:dataVK
                               options:kNilOptions
                               error:&error];
-        [self parserMessageFromLongPoll];
         NSLog(@"%@",[[NSString alloc] initWithData:dataVK encoding:NSUTF8StringEncoding]);
-        //[self listeningLongPollServer];
+        [self parserMessageFromLongPoll];
+
     }
     else
     {
@@ -99,9 +136,8 @@ bool listening;
                           error:&error];
         NSLog(@"%@",[[NSString alloc] initWithData:dataVK encoding:NSUTF8StringEncoding]);
     longPollKey=[NSString stringWithFormat:@"%@",json[@"response"][@"key"]];
-    longPollServer=[NSString stringWithFormat:@"%@",json[@"response"][@"server"]];
+    longPoll=[NSString stringWithFormat:@"%@",json[@"response"][@"server"]];
     longPollts=[NSString stringWithFormat:@"%@",json[@"response"][@"ts"]];
-    NSLog(@"%@ %@ %@", longPollServer, longPollKey, longPollts);
     [self listeningLongPollServer];
     }
 }

@@ -10,13 +10,10 @@
 #import "CollectionViewController.h"
 #import "ViewControllerThred.h"
 #import "TakeMySelf.h"
-#import "LongPollServer.h"
 @interface ViewControllerSecond ()
 @end
 const static int tagTbl=666;
-
 TakeMySelf*  myself;
-LongPollServer* longPollServer;
 User* sendUser;
 UITableView *tableView;
 NSArray *arrUsers;
@@ -24,8 +21,7 @@ NSArray *arrUsers;
 
 - (void)viewDidLoad {
     self.title=@"Friends";
-    longPollServer=[LongPollServer alloc];
-    [longPollServer connectToLongPoll];
+   // self presentViewController:<#(nonnull UIViewController *)#> animated:<#(BOOL)#> completion:<#^(void)completion#>//показать вьюшку поверх текущей
     [self.wAPI getUsers];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(downloadUsersComplete)

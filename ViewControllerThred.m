@@ -10,28 +10,39 @@
 #import "WorkAPI.h"
 #import "Messages.h"
 #import "MyCustomCell.h"
+#import "LongPollServer.h"
 @interface ViewControllerThred ()
 @end
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const int tagTbl=333;
 const int tagTxf=666;
 const int tagBtn=999;
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 UITableView *tableView;
 UITextField *textMsg;
 UIButton *sendBtn;
 UIImage *myPhoto;
 UIImage *interPhoto;
 NSMutableArray *historyMessage;
-
+LongPollServer *longPollServer;
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ViewControllerThred
 
--(void) requestMessage
-{
-    [self.userTmp getMessage];
-}
 -(void) downloadMessage
 {
     [historyMessage removeAllObjects];
     [historyMessage addObjectsFromArray:self.userTmp.messageHistory];
+    historyMessage=[[historyMessage reverseObjectEnumerator] allObjects];
+    [tableView reloadData];
+    CGPoint bottomOffset = CGPointMake(0, tableView.contentSize.height - tableView.bounds.size.height);
+    [tableView setContentOffset:bottomOffset animated:NO];
+}
+-(void)takeNewMessage{
+    longPollServer= [LongPollServer singleton];
+    Messages *newMessage=[Messages alloc];
+    newMessage=[longPollServer giveMessage];
+    [historyMessage addObject:newMessage];
+    NSLog(@"!@!@");
     [tableView reloadData];
     CGPoint bottomOffset = CGPointMake(0, tableView.contentSize.height - tableView.bounds.size.height);
     [tableView setContentOffset:bottomOffset animated:NO];
@@ -43,10 +54,12 @@ NSMutableArray *historyMessage;
                                                  name:@"GetHistoryComplete"
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(requestMessage)
-                                                 name:@"SendComplete"
+                                             selector:@selector(takeNewMessage)
+                                                 name:@"NewMessage"
                                                object:nil];
     historyMessage=[[NSMutableArray alloc] init];
+    longPollServer=[LongPollServer singleton];
+    [longPollServer whoListening:self.userTmp.userID];
     [self.userTmp getMessage];
     self.title=self.userTmp.fullName;
     tableView=[[UITableView alloc] initWithFrame:
@@ -95,7 +108,7 @@ NSMutableArray *historyMessage;
 }
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    historyMessage=[[historyMessage reverseObjectEnumerator] allObjects];
+
     return [historyMessage count];
 }
 -(MyCustomCell *) tableView:(UITableView *) tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
@@ -108,7 +121,7 @@ NSMutableArray *historyMessage;
         strTmp.mainString=@"Attachment";
     }
     NSString *cellIdentifier=@"Message";
-    MyCustomCell *cell =[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell==nil)
     {
         cell=[[MyCustomCell alloc]
@@ -116,11 +129,9 @@ NSMutableArray *historyMessage;
               UITableViewCellStyleDefault
               reuseIdentifier:cellIdentifier];
     }
-    [cell createCell:strTmp];
     cell.textLabel.text =strTmp.mainString;
     cell.textLabel.numberOfLines=0;
     [cell.textLabel sizeToFit];
-    [cell createCell:strTmp];
     if ([strTmp.outString isEqual:@"0"]) {
         
         cell.imageView.image=interPhoto;

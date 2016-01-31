@@ -14,5 +14,5 @@
 @property TakeMySelf *mySelf;
 -(void) buttonSendMessage;
 -(void) downloadMessage;
--(void) requestMessage;
+-(void) takeNewMessage;
 @end

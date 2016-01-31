@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		920FA42E1C4160E5009C9DE2 /* MyCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 920FA42D1C4160E5009C9DE2 /* MyCustomCell.m */; };
+		922372961C5B750F0051CC58 /* backgroundimg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 922372951C5B750F0051CC58 /* backgroundimg.jpg */; };
 		922840831C3323410054BE13 /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 922840821C3323410054BE13 /* CollectionViewController.m */; };
 		924777BE1BFE78810077D501 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 924777BD1BFE78810077D501 /* main.m */; };
 		924777C11BFE78810077D501 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 924777C01BFE78810077D501 /* AppDelegate.m */; };
@@ -48,6 +49,7 @@
 /* Begin PBXFileReference section */
 		920FA42C1C4160E5009C9DE2 /* MyCustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCustomCell.h; sourceTree = "<group>"; };
 		920FA42D1C4160E5009C9DE2 /* MyCustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCustomCell.m; sourceTree = "<group>"; };
+		922372951C5B750F0051CC58 /* backgroundimg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = backgroundimg.jpg; sourceTree = "<group>"; };
 		922840811C3323410054BE13 /* CollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewController.h; sourceTree = "<group>"; };
 		922840821C3323410054BE13 /* CollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewController.m; sourceTree = "<group>"; };
 		924777B91BFE78810077D501 /* testVKproject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testVKproject.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,6 +115,7 @@
 		924777B01BFE78810077D501 = {
 			isa = PBXGroup;
 			children = (
+				922372951C5B750F0051CC58 /* backgroundimg.jpg */,
 				926D6F021C58B89900FFA092 /* notavatar.jpeg */,
 				92962BB61C3DCD62003761CB /* OtherClasses */,
 				92AAA8BC1C1606E200DA9545 /* Controlls */,
@@ -320,6 +323,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				922372961C5B750F0051CC58 /* backgroundimg.jpg in Resources */,
 				924777CC1BFE78810077D501 /* LaunchScreen.storyboard in Resources */,
 				924777C91BFE78810077D501 /* Assets.xcassets in Resources */,
 				926D6F031C58B89900FFA092 /* notavatar.jpeg in Resources */,

@@ -7,9 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "Messages.h"
 @interface LongPollServer : NSObject<NSURLConnectionDelegate>
--(LongPollServer*) init;
++(LongPollServer *)singleton;
+-(Messages*)giveMessage;
+-(void)whoListening: (NSString*) userID;
 -(void)connectToLongPoll;
 -(void)listeningLongPollServer;
 -(void)parserMessageFromLongPoll;
