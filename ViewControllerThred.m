@@ -42,7 +42,6 @@ LongPollServer *longPollServer;
     Messages *newMessage=[Messages alloc];
     newMessage=[longPollServer giveMessage];
     [historyMessage addObject:newMessage];
-    NSLog(@"!@!@");
     [tableView reloadData];
     CGPoint bottomOffset = CGPointMake(0, tableView.contentSize.height - tableView.bounds.size.height);
     [tableView setContentOffset:bottomOffset animated:NO];
@@ -146,7 +145,7 @@ LongPollServer *longPollServer;
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Messages *strTmp=[Messages alloc];
-    strTmp= historyMessage [[historyMessage count]-indexPath.row-1];
+    strTmp= historyMessage [indexPath.row];
     UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width/2, 40)];
     label.numberOfLines=0;
     label.text=strTmp.mainString;
