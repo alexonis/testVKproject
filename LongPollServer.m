@@ -84,7 +84,6 @@ const int inoutmessage=2;
                 }
             }
                 break;
-                
             default:
                 break;
         }
@@ -113,13 +112,13 @@ const int inoutmessage=2;
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     if (listening) {
-        NSError *error;
-         json= [NSJSONSerialization
-                              JSONObjectWithData:dataVK
-                              options:kNilOptions
-                              error:&error];
-        //NSLog(@"%@",[[NSString alloc] initWithData:dataVK encoding:NSUTF8StringEncoding]);
-        [self parserMessageFromLongPoll];
+    NSError *error;
+    json= [NSJSONSerialization
+                        JSONObjectWithData:dataVK
+                        options:kNilOptions
+                        error:&error];
+    //NSLog(@"%@",[[NSString alloc] initWithData:dataVK encoding:NSUTF8StringEncoding]);
+    [self parserMessageFromLongPoll];
 
     }
     else

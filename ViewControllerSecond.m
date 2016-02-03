@@ -32,6 +32,7 @@ NSArray *arrUsers;
     [self.view addSubview:tableView];
     tableView.tag=tagTbl;
     tableView.delegate=self;
+    
     tableView.dataSource=self;
 }
 - (void)downloadUsersComplete{
@@ -61,41 +62,33 @@ NSArray *arrUsers;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     sendUser=[arrUsers objectAtIndex:indexPath.row];
-    UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:@"What do you choose...?"
-                                                       message:sendUser.fullName
-                                                      delegate:self
-                                             cancelButtonTitle:@"Message"
-                                             otherButtonTitles:@"Show Photos", nil];
-    [theAlert show];
-    //ViewControllerThred *vc;
-    //vc=[self.storyboard instantiateViewControllerWithIdentifier:@"ViewControllerThred"];
-    //vc.userTmp=[arrUsers objectAtIndex:indexPath.row];
-    //vc.my=myself;
-    //[self.navigationController pushViewController:vc animated:YES];
-    /*CollectionViewController *cvc;
-    cvc=[self.storyboard instantiateViewControllerWithIdentifier:@"CollectionViewController"];
-    cvc.userI=[arrUsers objectAtIndex:indexPath.row ];
-    [self.navigationController pushViewController:cvc animated:YES];*/
+    UIWindow *alertWindow;
+    alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    alertWindow.rootViewController = [UIViewController new];
+    alertWindow.windowLevel = 10000001;
+    alertWindow.hidden = NO;
     
-}
-- (void)alertView:(UIAlertView *)theAlert clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if ([[theAlert buttonTitleAtIndex:buttonIndex] isEqual:@"Message"]) {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"What do you choose...?" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        alertWindow.hidden = YES;
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Message" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         ViewControllerThred *vc;
         vc=[self.storyboard instantiateViewControllerWithIdentifier:@"ViewControllerThred"];
         vc.userTmp=sendUser;
         vc.mySelf=myself;
         [self.navigationController pushViewController:vc animated:YES];
-    }
-    else
-    {
+        alertWindow.hidden = YES;
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Show Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         CollectionViewController *cvc;
         cvc=[self.storyboard instantiateViewControllerWithIdentifier:@"CollectionViewController"];
         cvc.userI=sendUser;
         [self.navigationController pushViewController:cvc animated:YES];
-    }
+        alertWindow.hidden = YES;
+    }]];
+    [alertWindow.rootViewController presentViewController:alert animated:YES completion:nil];  
 }
-
 -(UITableViewCell *) tableView:(UITableView *) tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
     NSString *sIdentify=@"friends";
