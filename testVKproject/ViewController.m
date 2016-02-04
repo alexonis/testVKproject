@@ -12,17 +12,17 @@
 #import "User.h"
 #import "TakeMySelf.h"
 @interface ViewController ()
-
 @end
 const NSInteger tagWebView=1024;
-NSString* access_token;
-NSString* user_Id;
-UIWebView* webView;
+NSString *access_token;
+NSString *user_Id;
+UIWebView *webView;
 @implementation ViewController
 WorkAPI *wAPI;
 NSUserDefaults *userDefaults;
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.toolbarHidden=YES;
     self.view.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"backgroundimg.jpg"]];
     wAPI=[WorkAPI alloc];
     userDefaults = [NSUserDefaults standardUserDefaults];
@@ -33,9 +33,7 @@ NSUserDefaults *userDefaults;
         vc.wAPI=wAPI;
         [self.navigationController pushViewController:vc animated:YES];
     }
-    
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

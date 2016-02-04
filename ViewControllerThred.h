@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "User.h"
 #import "TakeMySelf.h"
-@interface ViewControllerThred : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface ViewControllerThred : UIViewController<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 @property User *userTmp;
 @property TakeMySelf *mySelf;
 -(void) buttonSendMessage;

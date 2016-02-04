@@ -67,7 +67,7 @@ LongPollServer *longPollServer;
     tableView.delegate=self;
     tableView.dataSource=self;
     [self.view addSubview:tableView];
-    textMsg=[[UITextField alloc] initWithFrame:CGRectMake(10, tableView.frame.size.height, 320, 40)];
+    textMsg=[[UITextField alloc] initWithFrame:CGRectMake(10, tableView.frame.size.height, 300, 40)];
     textMsg.tag=tagTxf;
     [self.view addSubview:textMsg];
     sendBtn=[UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -84,7 +84,6 @@ LongPollServer *longPollServer;
 - (void)dealloc {
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -107,10 +106,9 @@ LongPollServer *longPollServer;
 }
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
     return [historyMessage count];
 }
--(MyCustomCell *) tableView:(UITableView *) tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+-(UITableViewCell *) tableView:(UITableView *) tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
     
     Messages* strTmp=[Messages alloc];
@@ -150,18 +148,19 @@ LongPollServer *longPollServer;
     label.numberOfLines=0;
     label.text=strTmp.mainString;
     [label sizeToFit];
-   // if (label.frame.size.height >= 40.0)
-   // {
-        //NSLog(@"%f",label.frame.size.height);
- //       return label.frame.size.height;
- //   }
-  //  else
-  //  {
-        return 200.0;
-  //  }
-    
+   if (label.frame.size.height >= 100.0)
+    {
+        return label.frame.size.height+10;
+    }
+    else
+    {
+        return 100;
+    }
 }
-
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    NSLog(@"%@", textField.text);
+}
 /*
 #pragma mark - Navigation
 

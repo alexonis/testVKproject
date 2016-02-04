@@ -11,7 +11,7 @@
 @implementation TakeMySelf
 NSDictionary *jsonMY;
 NSUserDefaults *userDefaults;
-NSMutableData*  Vk;
+NSMutableData*  vk;
 -(TakeMySelf*) init
 {
     [self getMySelf];
@@ -19,9 +19,8 @@ NSMutableData*  Vk;
 }
 -(void) getMySelf
 {
-    
     userDefaults= [NSUserDefaults standardUserDefaults];
-    Vk = [NSMutableData data];
+    vk = [NSMutableData data];
     NSString *urlS=[NSString stringWithFormat:
                     @"https://api.vk.com/method/users.get?user_id=%@&fields=photo_50&v=5.40&access_token=%@",[userDefaults objectForKey:@"myId"],[userDefaults objectForKey:@"token"]];
     NSURL *url=[NSURL URLWithString:urlS];
@@ -38,19 +37,18 @@ NSMutableData*  Vk;
 }
 -(void)takeMyImg
 {
-    
     NSURL *urlIM=[NSURL URLWithString:jsonMY[@"response"][0][@"photo_50"]];
     NSData *dataIm=[NSData dataWithContentsOfURL:urlIM];
     myImage=[UIImage imageWithData:dataIm];
 }
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-    [Vk setLength:0];
+    [vk setLength:0];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    [Vk appendData:data];
+    [vk appendData:data];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
@@ -61,7 +59,7 @@ NSMutableData*  Vk;
 {
     NSError *error;
     jsonMY= [NSJSONSerialization
-                            JSONObjectWithData:Vk
+                            JSONObjectWithData:vk
                             options:kNilOptions
                             error:&error];
     [self takeMyname];

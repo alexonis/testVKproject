@@ -18,7 +18,6 @@ User* sendUser;
 UITableView *tableView;
 NSArray *arrUsers;
 @implementation ViewControllerSecond
-
 - (void)viewDidLoad {
     self.title=@"Friends";
    // self presentViewController:<#(nonnull UIViewController *)#> animated:<#(BOOL)#> completion:<#^(void)completion#>//показать вьюшку поверх текущей
@@ -32,7 +31,6 @@ NSArray *arrUsers;
     [self.view addSubview:tableView];
     tableView.tag=tagTbl;
     tableView.delegate=self;
-    
     tableView.dataSource=self;
 }
 - (void)downloadUsersComplete{
@@ -40,25 +38,19 @@ NSArray *arrUsers;
     [tableView reloadData];
     myself=[[TakeMySelf alloc] init];
 }
-
 - (void)didReceiveMemoryWarning {
-    
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-    
 }
 - (void)dealloc {
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
 }
-
 #pragma mark - UITableViewDataSource
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [arrUsers count];
 }
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     sendUser=[arrUsers objectAtIndex:indexPath.row];
@@ -67,7 +59,6 @@ NSArray *arrUsers;
     alertWindow.rootViewController = [UIViewController new];
     alertWindow.windowLevel = 10000001;
     alertWindow.hidden = NO;
-    
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"What do you choose...?" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         alertWindow.hidden = YES;
@@ -102,16 +93,23 @@ NSArray *arrUsers;
     }
     User* user= arrUsers[indexPath.row];
     cell.textLabel.text=[[arrUsers objectAtIndex:indexPath.row ] getName];
-    cell.imageView.image = [UIImage imageNamed:@"notavatar.jpeg"];// Показываем заглушку если нет основной фотографии
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{ // Загрузка в другом потоке
-        [arrUsers[indexPath.row] avaDownload];
-        dispatch_async(dispatch_get_main_queue(), ^{ //Показываем фотографию в основном потоке
-            cell.imageView.image=user->avaImage;
-            cell.imageView.clipsToBounds=YES;
-            cell.imageView.layer.cornerRadius=cell.imageView.frame.size.width/2;
+    if (user->avaImage!=nil) {
+        cell.imageView.image=user->avaImage;
+        cell.imageView.clipsToBounds=YES;
+        cell.imageView.layer.cornerRadius=cell.imageView.frame.size.width/2;
+    }
+    else
+    {
+        cell.imageView.image = [UIImage imageNamed:@"notavatar.jpeg"];// Показываем заглушку если нет основной фотографии
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{ // Загрузка в другом потоке
+            [arrUsers[indexPath.row] avaDownload];
+            dispatch_async(dispatch_get_main_queue(), ^{ //Показываем фотографию в основном потоке
+                cell.imageView.image=user->avaImage;
+                cell.imageView.clipsToBounds=YES;
+                cell.imageView.layer.cornerRadius=cell.imageView.frame.size.width/2;
+            });
         });
-    });
+    }
     return cell;
 }
 @end

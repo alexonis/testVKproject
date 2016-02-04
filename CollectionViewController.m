@@ -60,20 +60,20 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-
     // Configure the cell
-    cell.imgsUsr.image=[UIImage imageNamed:@"notavatar.jpeg"];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{ // Загрузка в другом потоке
-        UIImage *img=[self.userI imagesDownload:imgs[indexPath.row]];
-        dispatch_async(dispatch_get_main_queue(), ^{ //Показываем фотографию в основном потоке
-            cell.imgsUsr.image=img;
+    if (cell.imgsUsr.image==nil) {
+        cell.imgsUsr.image=[UIImage imageNamed:@"notavatar.jpeg"];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{ // Загрузка в другом потоке
+            UIImage *img=[self.userI imagesDownload:imgs[indexPath.row]];
+            dispatch_async(dispatch_get_main_queue(), ^{ //Показываем фотографию в основном потоке
+                cell.imgsUsr.image=img;
+            });
         });
-    });
+    }
     //if ((indexPath.row==[imgs count]/2)&&(indexPath.row + 1<self.userI.colvoImg)&&([imgs count]!=self.userI.colvoImg)) {
        
       //  [self.userI getUserImages:[imgs count]];
     //}
-
      NSLog(@"%lu %i", (unsigned long)[imgs count], self.userI.valueImages);
     return cell;
 }
@@ -82,14 +82,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-     NSLog(@"%f  %f",scrollView.contentSize.width,scrollView.contentSize.height);
-    
-     if(scrollView.contentOffset.y >= (scrollView.contentSize.height - scrollView.bounds.size.height) && !isRefresh)
-     {
-         isRefresh=true;
-         [self.userI getUserImages:[imgs count]];
-         NSLog(@" !!!!!!!!");
-     }
+ 
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

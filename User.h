@@ -26,5 +26,4 @@
 -(void)sendMessage:(NSString*) message;
 -(void)avaDownload;
 -(void)getUserImages:(int) imgNext;
-
 @end
