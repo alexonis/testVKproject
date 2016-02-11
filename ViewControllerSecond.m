@@ -10,6 +10,7 @@
 #import "CollectionViewController.h"
 #import "ViewControllerThred.h"
 #import "TakeMySelf.h"
+#import "ViewController.h"
 @interface ViewControllerSecond ()
 @end
 const static int tagTbl=666;
@@ -19,8 +20,19 @@ UITableView *tableView;
 NSArray *arrUsers;
 @implementation ViewControllerSecond
 - (void)viewDidLoad {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    if(([userDefaults objectForKey:@"token"]==nil)&&([userDefaults objectForKey:@"myId"]==nil))
+    {
+        UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main"
+                                                             bundle:nil];
+        ViewController *add =[storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
+        [self presentViewController:add animated:YES completion:NULL];//показать вьюшку поверх текущей
+        self.wAPI=add.wAPI;
+    }
+    else{
+       self.wAPI=[WorkAPI singleton];
+    }
     self.title=@"Friends";
-   // self presentViewController:<#(nonnull UIViewController *)#> animated:<#(BOOL)#> completion:<#^(void)completion#>//показать вьюшку поверх текущей
     [self.wAPI getUsers];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(downloadUsersComplete)

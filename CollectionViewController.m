@@ -70,11 +70,12 @@ static NSString * const reuseIdentifier = @"Cell";
             });
         });
     }
-    //if ((indexPath.row==[imgs count]/2)&&(indexPath.row + 1<self.userI.colvoImg)&&([imgs count]!=self.userI.colvoImg)) {
+    if ((indexPath.row==[imgs count]-1)&&(indexPath.row + 1<self.userI.valueImages)&&([imgs count]!=self.userI.valueImages)) {
        
-      //  [self.userI getUserImages:[imgs count]];
-    //}
-     NSLog(@"%lu %i", (unsigned long)[imgs count], self.userI.valueImages);
+        [self.userI getUserImages:[imgs count]];
+             NSLog(@"%lu %i", (unsigned long)[imgs count], self.userI.valueImages);
+    }
+
     return cell;
 }
 

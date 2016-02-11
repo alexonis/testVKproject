@@ -16,6 +16,15 @@ NSMutableData* dataVK;
 NSArray* arrayUserJson;
 NSArray* arrayMessageHistory;
 NSMutableArray* arrayUsersJsonImgUrls;
++(WorkAPI *) singleton
+{
+    static WorkAPI *workAPISingleton = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        workAPISingleton  = [[self alloc] init];
+    });
+    return workAPISingleton;
+}
 #pragma Work with users
 -(void)getUsers
 {

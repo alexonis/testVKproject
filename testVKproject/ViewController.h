@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "WorkAPI.h"
 @interface ViewController : UIViewController<UIWebViewDelegate>
--(IBAction)connectVK:(id)sender;
--(IBAction)getFriends:(id)sender;
+-(void)connectVK;
+@property WorkAPI *wAPI;
 @end

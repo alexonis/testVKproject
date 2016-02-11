@@ -14,6 +14,7 @@
 @property NSString* user_Id;
 @property User* usertmp;
 @property UIImage* myPhoto;
++(WorkAPI *)singleton;
 -(NSMutableArray*) parserUser;
 -(NSMutableArray*) parserImages;
 -(NSMutableArray*) parserMessage;

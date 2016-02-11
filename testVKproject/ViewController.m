@@ -18,28 +18,21 @@ NSString *access_token;
 NSString *user_Id;
 UIWebView *webView;
 @implementation ViewController
-WorkAPI *wAPI;
 NSUserDefaults *userDefaults;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.toolbarHidden=YES;
     self.view.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"backgroundimg.jpg"]];
-    wAPI=[WorkAPI alloc];
+    self.wAPI=[WorkAPI singleton];
     userDefaults = [NSUserDefaults standardUserDefaults];
-    if(([userDefaults objectForKey:@"token"]!=nil)&&([userDefaults objectForKey:@"myId"]!=nil))
-    {
-        ViewControllerSecond *vc;
-        vc=[self.storyboard instantiateViewControllerWithIdentifier:@"ViewControllerSecond"];
-        vc.wAPI=wAPI;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
+    [self connectVK];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
--(IBAction)connectVK:(id)sender
+-(void)connectVK
 {
     int clientID=5155977;
     webView = [[UIWebView alloc] initWithFrame:
@@ -53,15 +46,6 @@ NSUserDefaults *userDefaults;
     NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
     [webView loadRequest:requestObj];
 }
-
--(IBAction)getFriends:(id) sender
-{
-    ViewControllerSecond *vc;
-    vc=[self.storyboard instantiateViewControllerWithIdentifier:@"ViewControllerSecond"];
-    vc.wAPI=wAPI;
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
 - (void)webViewDidFinishLoad:(UIWebView *)webVi;
 {
     NSString *curUrl=webVi.request.URL.absoluteString;
@@ -73,7 +57,7 @@ NSUserDefaults *userDefaults;
     [userDefaults setObject:[curUrl substringFromIndex:
                              (range3.location+range3.length)] forKey:@"myId"];
     [userDefaults synchronize];
-    [[self.view viewWithTag:tagWebView] removeFromSuperview];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
