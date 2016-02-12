@@ -72,7 +72,7 @@ LongPollServer *longPollServer;
     [self.view addSubview:textMsg];
     sendBtn=[UIButton buttonWithType:UIButtonTypeRoundedRect];
     sendBtn.tag=tagBtn;
-    [sendBtn setTitle:@"Send Message" forState:UIControlStateNormal];
+    [sendBtn setTitle:@"Send" forState:UIControlStateNormal];
     [sendBtn sizeToFit];
     sendBtn.center = CGPointMake(350,tableView.frame.size.height+20);
     [sendBtn addTarget:self action:@selector(buttonSendMessage) forControlEvents:UIControlEventTouchUpInside];

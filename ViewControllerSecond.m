@@ -27,9 +27,10 @@ NSArray *arrUsers;
                                                              bundle:nil];
         ViewController *add =[storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
         [self presentViewController:add animated:YES completion:NULL];//показать вьюшку поверх текущей
-        self.wAPI=add.wAPI;
+        self.wAPI=[WorkAPI singleton];
     }
-    else{
+    else
+    {
        self.wAPI=[WorkAPI singleton];
     }
     self.title=@"Friends";
@@ -44,6 +45,10 @@ NSArray *arrUsers;
     tableView.tag=tagTbl;
     tableView.delegate=self;
     tableView.dataSource=self;
+}
+-(void) viewWillAppear:(BOOL)animated
+{
+    self.title=@"Friends";
 }
 - (void)downloadUsersComplete{
     arrUsers=[self.wAPI parserUser];
@@ -80,6 +85,7 @@ NSArray *arrUsers;
         vc=[self.storyboard instantiateViewControllerWithIdentifier:@"ViewControllerThred"];
         vc.userTmp=sendUser;
         vc.mySelf=myself;
+        self.title=@"Назад";
         [self.navigationController pushViewController:vc animated:YES];
         alertWindow.hidden = YES;
     }]];
@@ -87,6 +93,7 @@ NSArray *arrUsers;
         CollectionViewController *cvc;
         cvc=[self.storyboard instantiateViewControllerWithIdentifier:@"CollectionViewController"];
         cvc.userI=sendUser;
+        self.title=@"Назад";
         [self.navigationController pushViewController:cvc animated:YES];
         alertWindow.hidden = YES;
     }]];

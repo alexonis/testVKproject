@@ -36,7 +36,7 @@ NSUserDefaults *userDefaults;
 {
     int clientID=5155977;
     webView = [[UIWebView alloc] initWithFrame:
-               CGRectMake(0, 60, 450, 500)];
+               CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     webView.tag = tagWebView;
     webView.delegate = self;
     [self.view addSubview:webView];
@@ -49,6 +49,7 @@ NSUserDefaults *userDefaults;
 - (void)webViewDidFinishLoad:(UIWebView *)webVi;
 {
     NSString *curUrl=webVi.request.URL.absoluteString;
+    NSLog(@"%@", curUrl);
     NSRange range1=[curUrl rangeOfString:@"&expires"];
     NSRange range2=[curUrl rangeOfString:@"access_token="];
     NSRange range3=[curUrl rangeOfString:@"user_id="];
