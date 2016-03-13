@@ -58,7 +58,9 @@ NSUserDefaults *userDefaults;
     [userDefaults setObject:[curUrl substringFromIndex:
                              (range3.location+range3.length)] forKey:@"myId"];
     [userDefaults synchronize];
+    if ([userDefaults objectForKey:@"token"]!=nil) {
     [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 @end

@@ -11,7 +11,8 @@
 @interface CollectionViewController ()
 
 @end
-
+UIButton *logoutBtn;
+const int taBtn=1234;
 @implementation CollectionViewController
 bool isRefresh;
 NSMutableArray *imgs;
@@ -19,6 +20,14 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)viewDidLoad {
     isRefresh=false;
     [super viewDidLoad];
+    logoutBtn=[UIButton buttonWithType:UIButtonTypeRoundedRect];
+    logoutBtn.tag=taBtn;
+    [logoutBtn setTitle:@"Выход" forState:UIControlStateNormal];
+    [logoutBtn sizeToFit];
+    //logoutBtn.center = CGPointMake(350,tableView.frame.size.height+20);
+    [logoutBtn addTarget:self action:@selector(logoutAction) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *barButton=[[UIBarButtonItem alloc]initWithCustomView:logoutBtn];
+    self.navigationItem.rightBarButtonItem=barButton;
     self.title=self.userI.fullName;
     [self.userI getUserImages:0];
     imgs=[[NSMutableArray alloc]init];
@@ -70,6 +79,7 @@ static NSString * const reuseIdentifier = @"Cell";
             });
         });
     }
+  //  cell.frame.size.width=self.view.frame.size.width/3;
     if ((indexPath.row==[imgs count]-1)&&(indexPath.row + 1<self.userI.valueImages)&&([imgs count]!=self.userI.valueImages)) {
        
         [self.userI getUserImages:[imgs count]];
@@ -88,6 +98,10 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+-(void)logoutAction
+{
+     NSLog(@"ИДИНАХУЙ!");
 }
 
 /*

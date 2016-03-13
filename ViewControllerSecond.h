@@ -12,5 +12,6 @@
 
 @interface ViewControllerSecond : UIViewController <UITableViewDataSource, UITableViewDelegate>
 -(void)downloadUsersComplete;
+-(void) logoutAction;
 @property WorkAPI *wAPI;
 @end

@@ -17,6 +17,7 @@
 const int tagTbl=333;
 const int tagTxf=666;
 const int tagBtn=999;
+const int taBtn=1234;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 UITableView *tableView;
 UITextField *textMsg;
@@ -25,29 +26,21 @@ UIImage *myPhoto;
 UIImage *interPhoto;
 NSMutableArray *historyMessage;
 LongPollServer *longPollServer;
+UIButton *logoutBtn;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ViewControllerThred
 
--(void) downloadMessage
-{
-    [historyMessage removeAllObjects];
-    [historyMessage addObjectsFromArray:self.userTmp.messageHistory];
-    historyMessage=[[historyMessage reverseObjectEnumerator] allObjects];
-    [tableView reloadData];
-    CGPoint bottomOffset = CGPointMake(0, tableView.contentSize.height - tableView.bounds.size.height);
-    [tableView setContentOffset:bottomOffset animated:NO];
-}
--(void)takeNewMessage{
-    longPollServer= [LongPollServer singleton];
-    Messages *newMessage=[Messages alloc];
-    newMessage=[longPollServer giveMessage];
-    [historyMessage addObject:newMessage];
-    [tableView reloadData];
-    CGPoint bottomOffset = CGPointMake(0, tableView.contentSize.height - tableView.bounds.size.height);
-    [tableView setContentOffset:bottomOffset animated:NO];
-}
 - (void)viewDidLoad {
     [super viewDidLoad];
+    logoutBtn=[UIButton buttonWithType:UIButtonTypeRoundedRect];
+    logoutBtn.tag=taBtn;
+    [logoutBtn setTitle:@"Выход" forState:UIControlStateNormal];
+    [logoutBtn sizeToFit];
+    //logoutBtn.center = CGPointMake(350,tableView.frame.size.height+20);
+    [logoutBtn addTarget:self action:@selector(logoutAction) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *barButton=[[UIBarButtonItem alloc]initWithCustomView:logoutBtn];
+    self.navigationItem.rightBarButtonItem=barButton;
+
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(downloadMessage)
                                                  name:@"GetHistoryComplete"
@@ -81,6 +74,24 @@ LongPollServer *longPollServer;
     myPhoto=self.mySelf->myImage;
 }
 
+-(void) downloadMessage
+{
+    [historyMessage removeAllObjects];
+    [historyMessage addObjectsFromArray:self.userTmp.messageHistory];
+    historyMessage=[[historyMessage reverseObjectEnumerator] allObjects];
+    [tableView reloadData];
+    CGPoint bottomOffset = CGPointMake(0, tableView.contentSize.height - tableView.bounds.size.height);
+    [tableView setContentOffset:bottomOffset animated:NO];
+}
+-(void)takeNewMessage{
+    longPollServer= [LongPollServer singleton];
+    Messages *newMessage=[Messages alloc];
+    newMessage=[longPollServer giveMessage];
+    [historyMessage addObject:newMessage];
+    [tableView reloadData];
+    CGPoint bottomOffset = CGPointMake(0, tableView.contentSize.height - tableView.bounds.size.height);
+    [tableView setContentOffset:bottomOffset animated:NO];
+}
 - (void)dealloc {
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -160,6 +171,10 @@ LongPollServer *longPollServer;
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     NSLog(@"%@", textField.text);
+}
+-(void)logoutAction
+{
+    NSLog(@"ИДИНАХУЙ!");
 }
 /*
 #pragma mark - Navigation
