@@ -16,20 +16,10 @@
 const static int tagTbl=666;
 TakeMySelf*  myself;
 User* sendUser;
-UIButton *logoutBtn;
-const int taBtn=234;
 UITableView *tableView;
 NSArray *arrUsers;
 @implementation ViewControllerSecond
 - (void)viewDidLoad {
-    logoutBtn=[UIButton buttonWithType:UIButtonTypeRoundedRect];
-    logoutBtn.tag=taBtn;
-    [logoutBtn setTitle:@"Выход" forState:UIControlStateNormal];
-    [logoutBtn sizeToFit];
-    //logoutBtn.center = CGPointMake(350,tableView.frame.size.height+20);
-    [logoutBtn addTarget:self action:@selector(logoutAction) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *barButton=[[UIBarButtonItem alloc]initWithCustomView:logoutBtn];
-    self.navigationItem.rightBarButtonItem=barButton;
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     if(([userDefaults objectForKey:@"token"]==nil)&&([userDefaults objectForKey:@"myId"]==nil))
     {
@@ -140,9 +130,5 @@ NSArray *arrUsers;
         });
     }
     return cell;
-}
--(void)logoutAction
-{
-    NSLog(@"ИДИНАХУЙ!");
 }
 @end

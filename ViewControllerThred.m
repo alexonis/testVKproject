@@ -17,7 +17,6 @@
 const int tagTbl=333;
 const int tagTxf=666;
 const int tagBtn=999;
-const int taBtn=1234;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 UITableView *tableView;
 UITextField *textMsg;
@@ -26,20 +25,11 @@ UIImage *myPhoto;
 UIImage *interPhoto;
 NSMutableArray *historyMessage;
 LongPollServer *longPollServer;
-UIButton *logoutBtn;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ViewControllerThred
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    logoutBtn=[UIButton buttonWithType:UIButtonTypeRoundedRect];
-    logoutBtn.tag=taBtn;
-    [logoutBtn setTitle:@"Выход" forState:UIControlStateNormal];
-    [logoutBtn sizeToFit];
-    //logoutBtn.center = CGPointMake(350,tableView.frame.size.height+20);
-    [logoutBtn addTarget:self action:@selector(logoutAction) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *barButton=[[UIBarButtonItem alloc]initWithCustomView:logoutBtn];
-    self.navigationItem.rightBarButtonItem=barButton;
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(downloadMessage)
@@ -171,10 +161,6 @@ UIButton *logoutBtn;
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     NSLog(@"%@", textField.text);
-}
--(void)logoutAction
-{
-    NSLog(@"ИДИНАХУЙ!");
 }
 /*
 #pragma mark - Navigation

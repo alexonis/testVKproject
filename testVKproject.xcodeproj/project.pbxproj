@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		920FA42E1C4160E5009C9DE2 /* MyCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 920FA42D1C4160E5009C9DE2 /* MyCustomCell.m */; };
 		922372961C5B750F0051CC58 /* backgroundimg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 922372951C5B750F0051CC58 /* backgroundimg.jpg */; };
-		922840831C3323410054BE13 /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 922840821C3323410054BE13 /* CollectionViewController.m */; };
 		924777BE1BFE78810077D501 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 924777BD1BFE78810077D501 /* main.m */; };
 		924777C11BFE78810077D501 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 924777C01BFE78810077D501 /* AppDelegate.m */; };
 		924777C41BFE78810077D501 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 924777C31BFE78810077D501 /* ViewController.m */; };
@@ -25,6 +24,7 @@
 		92962BB51C3DCC97003761CB /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 92962BB41C3DCC97003761CB /* CollectionViewCell.m */; };
 		92962BB91C3DCEA4003761CB /* TakeMySelf.m in Sources */ = {isa = PBXBuildFile; fileRef = 92962BB81C3DCEA4003761CB /* TakeMySelf.m */; };
 		929D68721C5A2CFC00AA56A7 /* LongPollServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 929D68711C5A2CFC00AA56A7 /* LongPollServer.m */; };
+		92A585571CA5E3EA00886271 /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A585561CA5E3EA00886271 /* CollectionViewController.m */; };
 		92C350DF1C0F109E004F4CA6 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 92C350DE1C0F109E004F4CA6 /* User.m */; };
 		92C350E21C0F15E2004F4CA6 /* WorkAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 92C350E11C0F15E2004F4CA6 /* WorkAPI.m */; };
 /* End PBXBuildFile section */
@@ -51,7 +51,6 @@
 		920FA42D1C4160E5009C9DE2 /* MyCustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCustomCell.m; sourceTree = "<group>"; };
 		922372951C5B750F0051CC58 /* backgroundimg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = backgroundimg.jpg; sourceTree = "<group>"; };
 		922840811C3323410054BE13 /* CollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewController.h; sourceTree = "<group>"; };
-		922840821C3323410054BE13 /* CollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewController.m; sourceTree = "<group>"; };
 		924777B91BFE78810077D501 /* testVKproject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testVKproject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		924777BD1BFE78810077D501 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		924777BF1BFE78810077D501 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -81,6 +80,7 @@
 		92962BB81C3DCEA4003761CB /* TakeMySelf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TakeMySelf.m; sourceTree = "<group>"; };
 		929D68701C5A2CFC00AA56A7 /* LongPollServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LongPollServer.h; sourceTree = "<group>"; };
 		929D68711C5A2CFC00AA56A7 /* LongPollServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LongPollServer.m; sourceTree = "<group>"; };
+		92A585561CA5E3EA00886271 /* CollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewController.m; sourceTree = "<group>"; };
 		92C350DD1C0F109E004F4CA6 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		92C350DE1C0F109E004F4CA6 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		92C350E01C0F15E2004F4CA6 /* WorkAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkAPI.h; sourceTree = "<group>"; };
@@ -213,7 +213,7 @@
 				920FA42C1C4160E5009C9DE2 /* MyCustomCell.h */,
 				920FA42D1C4160E5009C9DE2 /* MyCustomCell.m */,
 				922840811C3323410054BE13 /* CollectionViewController.h */,
-				922840821C3323410054BE13 /* CollectionViewController.m */,
+				92A585561CA5E3EA00886271 /* CollectionViewController.m */,
 				92962BB31C3DCC97003761CB /* CollectionViewCell.h */,
 				92962BB41C3DCC97003761CB /* CollectionViewCell.m */,
 			);
@@ -355,7 +355,6 @@
 				92962BB91C3DCEA4003761CB /* TakeMySelf.m in Sources */,
 				925ABA381C3A8ED400875325 /* ViewControllerThred.m in Sources */,
 				92C350DF1C0F109E004F4CA6 /* User.m in Sources */,
-				922840831C3323410054BE13 /* CollectionViewController.m in Sources */,
 				92962BB21C3DC981003761CB /* Messages.m in Sources */,
 				924777F11BFE83280077D501 /* ViewControllerSecond.m in Sources */,
 				920FA42E1C4160E5009C9DE2 /* MyCustomCell.m in Sources */,
@@ -363,6 +362,7 @@
 				92962BB51C3DCC97003761CB /* CollectionViewCell.m in Sources */,
 				924777C11BFE78810077D501 /* AppDelegate.m in Sources */,
 				924777BE1BFE78810077D501 /* main.m in Sources */,
+				92A585571CA5E3EA00886271 /* CollectionViewController.m in Sources */,
 				92C350E21C0F15E2004F4CA6 /* WorkAPI.m in Sources */,
 				929D68721C5A2CFC00AA56A7 /* LongPollServer.m in Sources */,
 			);
@@ -507,10 +507,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_NO_COMMON_BLOCKS = NO;
 				INFOPLIST_FILE = testVKproject/Info.plist;
-				OTHER_LDFLAGS = (
-					"$(OTHER_LDFLAGS)",
-					"-ObjC",
-				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "-.testVKproject";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -522,10 +519,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_NO_COMMON_BLOCKS = NO;
 				INFOPLIST_FILE = testVKproject/Info.plist;
-				OTHER_LDFLAGS = (
-					"$(OTHER_LDFLAGS)",
-					"-ObjC",
-				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "-.testVKproject";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

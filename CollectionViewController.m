@@ -11,8 +11,6 @@
 @interface CollectionViewController ()
 
 @end
-UIButton *logoutBtn;
-const int taBtn=1234;
 @implementation CollectionViewController
 bool isRefresh;
 NSMutableArray *imgs;
@@ -20,14 +18,6 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)viewDidLoad {
     isRefresh=false;
     [super viewDidLoad];
-    logoutBtn=[UIButton buttonWithType:UIButtonTypeRoundedRect];
-    logoutBtn.tag=taBtn;
-    [logoutBtn setTitle:@"Выход" forState:UIControlStateNormal];
-    [logoutBtn sizeToFit];
-    //logoutBtn.center = CGPointMake(350,tableView.frame.size.height+20);
-    [logoutBtn addTarget:self action:@selector(logoutAction) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *barButton=[[UIBarButtonItem alloc]initWithCustomView:logoutBtn];
-    self.navigationItem.rightBarButtonItem=barButton;
     self.title=self.userI.fullName;
     [self.userI getUserImages:0];
     imgs=[[NSMutableArray alloc]init];
@@ -90,7 +80,10 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 #pragma mark <UICollectionViewDelegate>
-
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return CGSizeMake(collectionView.frame.size.width/2.1, collectionView.frame.size.width/2.1);
+    
+}
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
  
@@ -99,10 +92,7 @@ static NSString * const reuseIdentifier = @"Cell";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)logoutAction
-{
-     NSLog(@"ИДИНАХУЙ!");
-}
+
 
 /*
 // Uncomment this method to specify if the specified item should be highlighted during tracking
